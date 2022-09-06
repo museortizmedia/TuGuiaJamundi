@@ -1,0 +1,95 @@
+/*
+https://picsum.photos/2160/1080
+*/
+.shadow-none {
+  box-shadow: none!important;
+}
+.shadow-sm {
+  box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+}
+.shadow {
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+.shadow-lg {
+  box-shadow: 0 1rem 3rem rgba(0,0,0,.175)!important;
+}
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+  }
+.menu_item {
+  font-weight: bold!important;
+  color: #555!important;
+}
+.menu_item:hover {
+  color: #000!important;
+}
+.menu_item_footer {
+  color: rgb(128, 128, 128)!important;
+  text-decoration: none!important;
+}
+.menu_item_footer:hover {
+  color: rgb(73, 73, 73)!important;
+}
+.una_linea{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.border{
+  border-radius: 30px;
+}
+.blur{
+  background-color: rgba(255, 255, 255, 0.61);
+  backdrop-filter: blur(5px);
+  box-shadow: 0px 15px 15px rgba(0,0,0,.2);
+}
+.blur_blue{
+  background-color: rgba(15, 71, 175, 0.61);
+  backdrop-filter: blur(.5px);
+}
+.tarjeta_tag {
+  border-radius: 0px 30px 0px 20px;
+  position: absolute;
+  top: 0px;
+  right: 0;
+  width:120px;
+  height:30px;
+  box-shadow: 0px 5px 15px rgba(0,0,0,.2);
+}
+.tarjeta_content {
+  border-radius: 30px;
+  position: absolute;
+  bottom: 10px;
+  width:85%;
+  height:70px;
+  text-align: start;
+}
+.tarjeta_content:hover{
+  height:72px;
+  cursor: pointer;
+}
+.mapa{
+  border-radius: 30px;
+  height: 80vh;
+  width: 40vw;
+  background-image: url('./Images/Mapa/mapa.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #000;
+}
+.bg_login_register{
+  background-image: url('./Images/Login/fondo.jpeg');
+  background-position: center center;
+}
+
+/*ediciones bootstrap*/
+.btn-outline-warning:hover{
+  color: white!important;}
+  /*editar important el color final del warning*/
