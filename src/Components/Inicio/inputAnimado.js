@@ -1,5 +1,7 @@
+import { useNavigate } from "react-router-dom";
+import { FaSearch } from 'react-icons/fa';
 import React, {useState, useEffect} from "react";
-import {Form} from 'react-bootstrap'
+import {Form, Button} from 'react-bootstrap'
 
 export const AnimatedInput = ({placeholder_animado}) => {
 
@@ -45,8 +47,20 @@ export const AnimatedInput = ({placeholder_animado}) => {
         }
     },);*/
 
+    let navigate = useNavigate();
 
-    return <Form.Control id="search" style={{borderRadius:"30px 0px 0px 30px"}} placeholder={placeholder} autoComplete="off"/>
+    const Buscar = () => {
+        navigate("/mapa?filtro="+document.getElementById('search').value);
+    }
+
+    const SetPlaceholder = () =>{
+        if(document.getElementById('search').placeholder===placeholder_animado[placeholderIndex])
+        {
+            document.getElementById('search').value=placeholder_animado[placeholderIndex]
+        }
+    }
+
+    return <><Form.Control id="search" style={{borderRadius:"30px 0px 0px 30px"}} placeholder={placeholder} autoComplete="off" onFocus={SetPlaceholder}/><Button style={{borderRadius:"0px 30px 30px 0px"}} variant="warning" className='text-white' onClick={Buscar}><FaSearch/></Button></>
 };
 
 export default AnimatedInput;

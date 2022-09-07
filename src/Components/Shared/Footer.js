@@ -63,8 +63,9 @@ function Footer() {
                     </div>
                 </div>
                 <div className='mt-2 mb-2'>
-                    <p className='text-xs-center'></p>
+                    <p className='text-xs-center noselect'>
                     &copy;{new Date().getFullYear()} Jamundí, Valle del Cauca - Todos los derechos reservados
+                    </p>
                 </div>
             </Container>
         </>

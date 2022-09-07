@@ -12,8 +12,8 @@ export const TarjetaTop = ({img, sitio, desc}) => {
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
-        width: "100px",
-        height: "100px",
+        width: "120px",
+        height: "120px",
         position: "relative",
         backgroundImage: "url("+img+")",
         }} className="bg-warning shadow-sm my-auto">

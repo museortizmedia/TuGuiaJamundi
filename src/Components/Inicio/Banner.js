@@ -1,16 +1,9 @@
-import { useNavigate } from "react-router-dom";
-import { FaSearch } from 'react-icons/fa';
-import {Row, Col, Container, InputGroup, Button} from 'react-bootstrap'
+import {Row, Col, Container, InputGroup} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 import AnimatedInput from './inputAnimado'
 
 export const Banner = () => {
-    let navigate = useNavigate();
-
-    const Buscar = () => {
-        navigate("/mapa?filtro="+document.getElementById('search').value);
-    }
 
     return (
         <>
@@ -43,7 +36,6 @@ export const Banner = () => {
             "Un deleite al paladar...",
             "Un reto al cuerpo..."
             ]}/>
-        <Button style={{borderRadius:"0px 30px 30px 0px"}} variant="warning" className='text-white' onClick={Buscar}><FaSearch/></Button>
         </InputGroup>
         </Col>
     </Row>

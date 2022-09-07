@@ -17,12 +17,12 @@ export const Index = () => {
     <Container fluid className="pt-5 mb-2" style={{width:"95%"}}>
     <Row>
         <Col className='col-12 col-lg-7'>
-        <h2>Descubre los lugares de Jamundí</h2>
-        <p className='text-muted'>Estos son los resultados destacados de tu búsqueda...</p>
+        <h2 className='noselect'>Descubre los lugares de Jamundí</h2>
+        <p className='text-muted noselect'>Estos son los resultados destacados de tu búsqueda...</p>
         </Col>
         <Col className='d-none d-lg-block col-lg-5'>
-        <h2>Esto podría gustarte</h2>
-        <p className='text-muted'>Sitios destacados de la semana</p>
+        <h2 className='noselect'>Esto podría gustarte</h2>
+        <p className='text-muted noselect'>Sitios destacados de la semana</p>
         </Col>
     </Row>
     <Row>
@@ -44,10 +44,10 @@ export const Index = () => {
         </Row>
     {/* SITIOSSUGERIDOS: Side con negocios que pagan plan premium */}
     <Col className='d-block d-lg-none col-12 mt-5'>
-        <h2>Esto podría gustarte</h2>
-        <p className='text-muted'>Sitios destacados de la semana</p>
+        <h2 className="noselect">Esto podría gustarte</h2>
+        <p className='text-muted noselect'>Sitios destacados de la semana</p>
     </Col>
-        <Col className='col-12 col-lg-5'>
+        <Col className='col-12 col-lg-5 bg-light'>
             <div className='' style={{overflow: "auto",width: "100%", height: "40vh"}}>
                 <TarjetaTop img="https://mui.kitchen/__export/1601953024234/sites/muikitchen/img/2020/10/05/9_cholado_1.jpg_1339198041.jpg" sitio="El Parque del Cholado" desc="El único y original cholado de jamundí desde $12.000"/>
                 <TarjetaTop img="https://www.municipios.com.co/sitiosturisticos/20150222111434.jpg" sitio="Monumento a la vida" desc="Homenaje a las 11 personas asesinadas por el ejército, construida por Héctor Lombara"/>
