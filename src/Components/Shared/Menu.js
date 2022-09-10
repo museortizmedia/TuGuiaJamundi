@@ -51,7 +51,7 @@ export const Menu = ({selected}) => {
                 </a>
             </Col>
             <Col xs={10} className="text-end my-auto d-none d-sm-block">
-            <a id="btn_mapa" className="p-2 nav-item nav-link menu_item d-inline " href='/#/mapa'>El Mapa</a>
+            <a id="btn_mapa" className="p-2 nav-item nav-link menu_item d-inline " href='/TuGuiaJamundi/#/mapa'>El Mapa</a>
                 <span id='sesion_noactive'>
                     <a id="btn_register" className="p-2 nav-item nav-link menu_item d-inline" href='/#/registrarse'>Registrarse</a>
                     <a id="btn_login" className="p-2 nav-item nav-link menu_item d-inline" href='/#/login'>Iniciar Sesión</a>
