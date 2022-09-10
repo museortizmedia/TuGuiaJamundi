@@ -46,18 +46,18 @@ export const Menu = ({selected}) => {
         <Container fluid className="bg-trasparent p-2 navbar-expand-sm" style={{width: "95%"}}>
         <Row className="mx-auto">
             <Col xs={2} className="my-auto">
-                <a href='/'>
+                <a href='/TuGuiaJamundi/'>
                     <img src={require('../../Images/Brand/logo1080.png')} alt={"Logo"} style={{width: "120px"}}/>
                 </a>
             </Col>
             <Col xs={10} className="text-end my-auto d-none d-sm-block">
             <a id="btn_mapa" className="p-2 nav-item nav-link menu_item d-inline " href='/TuGuiaJamundi/#/mapa'>El Mapa</a>
                 <span id='sesion_noactive'>
-                    <a id="btn_register" className="p-2 nav-item nav-link menu_item d-inline" href='/#/registrarse'>Registrarse</a>
-                    <a id="btn_login" className="p-2 nav-item nav-link menu_item d-inline" href='/#/login'>Iniciar Sesión</a>
+                    <a id="btn_register" className="p-2 nav-item nav-link menu_item d-inline" href='/TuGuiaJamundi/#/registrarse'>Registrarse</a>
+                    <a id="btn_login" className="p-2 nav-item nav-link menu_item d-inline" href='/TuGuiaJamundi/#/login'>Iniciar Sesión</a>
                 </span>
                 <span id='sesion_active' className='d-none'>
-                <a id="btn_register_sa" className="p-2 nav-item nav-link menu_item d-inline" href='/#/registrarse'>Registrarse</a>
+                <a id="btn_register_sa" className="p-2 nav-item nav-link menu_item d-inline" href='/TuGuiaJamundi/#/registrarse'>Registrarse</a>
                 <a href='/'>
                     <img className="p-2 nav-item nav-link menu_item d-inline" src={require('../../Images/Brand/User.png')} alt={"User"} title="cerrar sesión" style={{width: "60px"}} onClick={Cerrar_IniciarSesion}/>
                 </a>
