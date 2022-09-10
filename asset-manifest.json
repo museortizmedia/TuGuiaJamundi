@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/https//museortizmedia.github.io/TuGuiaJamundi/static/css/main.34ad7b26.css",
-    "main.js": "/https//museortizmedia.github.io/TuGuiaJamundi/static/js/main.acd85459.js",
-    "static/media/fondo.jpeg": "/https//museortizmedia.github.io/TuGuiaJamundi/static/media/fondo.3cfeb65dbee59e0d1c88.jpeg",
-    "static/media/mapa.png": "/https//museortizmedia.github.io/TuGuiaJamundi/static/media/mapa.09c5eba6cd11d779030e.png",
-    "static/media/Pick.png": "/https//museortizmedia.github.io/TuGuiaJamundi/static/media/Pick.ccc7a7aedb4e2aa0deb1.png",
-    "static/media/logo1080.png": "/https//museortizmedia.github.io/TuGuiaJamundi/static/media/logo1080.ab29128885bc60f2d0be.png",
-    "static/media/User.png": "/https//museortizmedia.github.io/TuGuiaJamundi/static/media/User.50cfcfdbe913cf306c77.png",
-    "index.html": "/https//museortizmedia.github.io/TuGuiaJamundi/index.html",
-    "main.34ad7b26.css.map": "/https//museortizmedia.github.io/TuGuiaJamundi/static/css/main.34ad7b26.css.map",
-    "main.acd85459.js.map": "/https//museortizmedia.github.io/TuGuiaJamundi/static/js/main.acd85459.js.map"
+    "main.css": "/TuGuiaJamundi/static/css/main.6028e296.css",
+    "main.js": "/TuGuiaJamundi/static/js/main.9f0715c4.js",
+    "static/media/fondo.jpeg": "/TuGuiaJamundi/static/media/fondo.3cfeb65dbee59e0d1c88.jpeg",
+    "static/media/mapa.png": "/TuGuiaJamundi/static/media/mapa.09c5eba6cd11d779030e.png",
+    "static/media/Pick.png": "/TuGuiaJamundi/static/media/Pick.ccc7a7aedb4e2aa0deb1.png",
+    "static/media/logo1080.png": "/TuGuiaJamundi/static/media/logo1080.ab29128885bc60f2d0be.png",
+    "static/media/User.png": "/TuGuiaJamundi/static/media/User.50cfcfdbe913cf306c77.png",
+    "index.html": "/TuGuiaJamundi/index.html",
+    "main.6028e296.css.map": "/TuGuiaJamundi/static/css/main.6028e296.css.map",
+    "main.9f0715c4.js.map": "/TuGuiaJamundi/static/js/main.9f0715c4.js.map"
   },
   "entrypoints": [
-    "static/css/main.34ad7b26.css",
-    "static/js/main.acd85459.js"
+    "static/css/main.6028e296.css",
+    "static/js/main.9f0715c4.js"
   ]
 }
