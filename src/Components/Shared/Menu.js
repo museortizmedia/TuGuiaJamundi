@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import {Row, Col, Container} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
+
 export const Menu = ({selected}) => {
 
     const Activar_IniciarSesion = () => {
@@ -49,13 +51,13 @@ export const Menu = ({selected}) => {
                 </a>
             </Col>
             <Col xs={10} className="text-end my-auto d-none d-sm-block">
-            <a id="btn_mapa" className="p-2 nav-item nav-link menu_item d-inline " href='/mapa'>El Mapa</a>
+            <a id="btn_mapa" className="p-2 nav-item nav-link menu_item d-inline " href='/#/mapa'>El Mapa</a>
                 <span id='sesion_noactive'>
-                    <a id="btn_register" className="p-2 nav-item nav-link menu_item d-inline" href='/registrarse'>Registrarse</a>
-                    <a id="btn_login" className="p-2 nav-item nav-link menu_item d-inline" href='/login'>Iniciar Sesión</a>
+                    <a id="btn_register" className="p-2 nav-item nav-link menu_item d-inline" href='/#/registrarse'>Registrarse</a>
+                    <a id="btn_login" className="p-2 nav-item nav-link menu_item d-inline" href='/#/login'>Iniciar Sesión</a>
                 </span>
                 <span id='sesion_active' className='d-none'>
-                <a id="btn_register_sa" className="p-2 nav-item nav-link menu_item d-inline" href='/registrarse'>Registrarse</a>
+                <a id="btn_register_sa" className="p-2 nav-item nav-link menu_item d-inline" href='/#/registrarse'>Registrarse</a>
                 <a href='/'>
                     <img className="p-2 nav-item nav-link menu_item d-inline" src={require('../../Images/Brand/User.png')} alt={"User"} title="cerrar sesión" style={{width: "60px"}} onClick={Cerrar_IniciarSesion}/>
                 </a>

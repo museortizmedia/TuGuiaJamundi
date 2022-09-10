@@ -8,18 +8,21 @@ import Register from './Pages/Registro/register';
 import Mapa from './Pages/Mapa/mapa';
 import Perfil from './Pages/Perfil/perfil';
 
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-  <BrowserRouter>
+  {/*<BrowserRouter>*/}
+  <HashRouter>
   <Routes>
         <Route path="/" element={<Index/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/registrarse" element={<Register/>} />
         <Route path="/mapa" element={<Mapa/>} />
         <Route path="/perfil" element={<Perfil/>} />
-  </Routes>    
-  </BrowserRouter>
+  </Routes>
+  </HashRouter>
+  {/*</BrowserRouter>*/}
   </React.StrictMode>
 );
