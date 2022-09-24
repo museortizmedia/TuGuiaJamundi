@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 
 import {Row, Col, Container} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -45,12 +44,12 @@ export const Menu = ({selected}) => {
         <>
         <Container fluid className="bg-trasparent p-2 navbar-expand-sm" style={{width: "95%"}}>
         <Row className="mx-auto">
-            <Col xs={2} className="my-auto">
+            <Col xs={2} className="my-auto noselect">
                 <a href='/TuGuiaJamundi/'>
                     <img src={require('../../Images/Brand/logo1080.png')} alt={"Logo"} style={{width: "120px"}}/>
                 </a>
             </Col>
-            <Col xs={10} className="text-end my-auto d-none d-sm-block">
+            <Col xs={10} className="text-end my-auto d-none d-sm-block noselect">
             <a id="btn_mapa" className="p-2 nav-item nav-link menu_item d-inline " href='/TuGuiaJamundi/#/mapa'>El Mapa</a>
                 <span id='sesion_noactive'>
                     <a id="btn_register" className="p-2 nav-item nav-link menu_item d-inline" href='/TuGuiaJamundi/#/registrarse'>Registrarse</a>

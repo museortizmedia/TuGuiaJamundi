@@ -6,7 +6,7 @@ export const Tarjeta = ({alto,img,btn,tags,sitio,tagtitle}) => {
     const navigate = useNavigate();
     const VerMas = () => {
         var filter = document.getElementById('search').value?document.getElementById('search').value:document.getElementById('search').placeholder;
-        navigate("/mapa?filtro="+filter,{replace: true})
+        navigate("/mapa?filtro="+encodeURI(filter),{replace: true})
      };
     return (
         <>
