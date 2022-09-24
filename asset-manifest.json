@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/TuGuiaJamundi/static/css/main.6028e296.css",
-    "main.js": "/TuGuiaJamundi/static/js/main.bc592100.js",
+    "main.js": "/TuGuiaJamundi/static/js/main.da88d593.js",
     "static/media/fondo.jpeg": "/TuGuiaJamundi/static/media/fondo.3cfeb65dbee59e0d1c88.jpeg",
     "static/media/mapa.png": "/TuGuiaJamundi/static/media/mapa.09c5eba6cd11d779030e.png",
     "static/media/Pick.png": "/TuGuiaJamundi/static/media/Pick.ccc7a7aedb4e2aa0deb1.png",
@@ -9,10 +9,10 @@
     "static/media/User.png": "/TuGuiaJamundi/static/media/User.50cfcfdbe913cf306c77.png",
     "index.html": "/TuGuiaJamundi/index.html",
     "main.6028e296.css.map": "/TuGuiaJamundi/static/css/main.6028e296.css.map",
-    "main.bc592100.js.map": "/TuGuiaJamundi/static/js/main.bc592100.js.map"
+    "main.da88d593.js.map": "/TuGuiaJamundi/static/js/main.da88d593.js.map"
   },
   "entrypoints": [
     "static/css/main.6028e296.css",
-    "static/js/main.bc592100.js"
+    "static/js/main.da88d593.js"
   ]
 }
