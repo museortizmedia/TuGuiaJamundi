@@ -50,7 +50,11 @@ export const AnimatedInput = ({placeholder_animado}) => {
     let navigate = useNavigate();
 
     const Buscar = () => {
-        navigate("/mapa?filtro="+document.getElementById('search').value);
+        if(document.getElementById('search').value===""){
+            //navigate("/TuGuiaJamundi/#/mapa");
+        }else{
+            navigate("/mapa/"+document.getElementById('search').value);
+        }
     }
 
     const SetPlaceholder = () =>{
