@@ -19,7 +19,6 @@ return (
                         <img className="p-2" src={Pick} width='15%' alt=''/>
                     </div>
                     <h2 className='fw-bold text-center pt-5 mb-5'>Bienvenido</h2>
-
                     <form action='/#'>
                         <div className='mb-4'>
                             <label for='email' className='form-label'>Correo electrónico</label>
