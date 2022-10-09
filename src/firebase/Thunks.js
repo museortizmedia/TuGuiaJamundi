@@ -1,12 +1,13 @@
 import {createUserWithEmailAndPassword, updateProfile} from 'firebase/auth';
 import {auth} from './config';
+import { register } from './AuthSlice';
 
 export const registerAuth = (email, password ) => {
+    console.log('Estamos registrando a: '+email+'...')
     return async ( dispatch ) => {
         const response = await createUserWithEmailAndPassword(auth, email, password)
         if(response) {
-            console.log(response)
-            await updateProfile( auth.currrentUser, {
+            await updateProfile( auth.authState, {
                 displayName: 'Diego',
                 photoURL: ''
             })

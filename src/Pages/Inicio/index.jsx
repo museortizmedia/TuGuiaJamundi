@@ -6,7 +6,7 @@ import Footer from '../../Components/Shared/Footer'
 import Banner from '../../Components/Inicio/Banner'
 import Tarjeta from '../../Components/Inicio/tarjeta_negocio'
 import TarjetaTop from '../../Components/Inicio/tarjeta_top'
-import { Upload } from '../../firebase/storage/upload'
+//import { Upload } from '../../firebase/storage/upload'
 export const Index = () => {
     return (
     <>
@@ -58,7 +58,7 @@ export const Index = () => {
     </Row></Container>
     {/* FOOTER */}
     <Footer/>
-    <Upload/>
+    {/*<Upload/>*/}
     </>
     )
 }

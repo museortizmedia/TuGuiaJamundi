@@ -13,5 +13,6 @@ root.render(
   <React.StrictMode>
     <MainApp/>
   </React.StrictMode>
-</Provider> //authoritation firebase
+</Provider>
+//authoritation firebase
 );

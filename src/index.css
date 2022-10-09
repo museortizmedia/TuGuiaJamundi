@@ -78,18 +78,21 @@ https://picsum.photos/2160/1080
   border-radius: 30px;
   height: 80vh;
   width: 40vw;
-  background-image: url('./Images/Mapa/mapa.png');
+  background-image: url('https://i.picsum.photos/id/851/2160/1080.jpg?hmac=y5R_Amsnxkjzhdb8kU9gAEM1zNiFQQHAHkY4-ajdbKw');
+  /*background-image: url('./Images/Mapa/mapa.png');*/
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #000;
 }
 .bg_login_register{
-  background-image: url('./Images/Login/fondo.jpeg');
+  background-image: url('https://i.picsum.photos/id/851/2160/1080.jpg?hmac=y5R_Amsnxkjzhdb8kU9gAEM1zNiFQQHAHkY4-ajdbKw');
+  /*background-image: url('./Images/Login/fondo.jpeg');*/
   background-position: center center;
 }
 
 /*ediciones bootstrap*/
 .btn-outline-warning:hover{
-  color: white!important;}
+  color: white!important;
+}
   /*editar important el color final del warning*/
