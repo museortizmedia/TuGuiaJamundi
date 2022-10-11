@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
 
 import Pick from '../../Images/Brand/Pick.png';
-import { FaFacebook, FaGoogle} from 'react-icons/fa';
 
 //import { useDispatch } from 'react-redux';
 //import { registerAuth } from '../../firebase/Thunks';
@@ -12,10 +11,11 @@ import { useContextAuth } from '../../context/authContext';
 
 import Menu from '../../Components/Shared/Menu';
 import Footer from '../../Components/Shared/Footer'
+import SocialLogin from '../Login/socialogin';
 
 export const Registro = () => {
 //variables
-    const {singup} = useContextAuth();
+    const {singup, loginWithFacebook, loginWithGoogle} = useContextAuth();
     //const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -28,7 +28,6 @@ export const Registro = () => {
     //state de error
     const [error, setError] = useState();
 
-//funciones
 
     //evento al actualizar inputs
     const onHandleChange = ({target:{name, value}}) =>{
@@ -115,37 +114,14 @@ export const Registro = () => {
                     </div>
                     </form>
                 {/* Auth */}
-                <div className='container w-100 my-5'>
-                    <div className='row text-center mb-4'>
-                        <div className='col-12'>Registrarse con:</div>
-                    </div>
-                    <div className='row'>
-                        <div className='col-12 col-lg'>
-                            <button className='btn btn-outline-primary w-100 my-1'>
-                                <div className='row align-items-center'>
-                                    <div className='col-3 align-items-center'>
-                                    <FaFacebook style={{fontSize:"41px"}}/>
-                                    </div>
-                                    <div className='col-9 text-center'>
-                                        Facebook
-                                    </div>
-                                </div>
-                            </button>
-                        </div>
-                        <div className='col-12 col-lg'>
-                            <button className='btn btn-outline-danger w-100 my-1'>
-                                <div className='row align-items-center'>
-                                    <div className='col-3'>
-                                    <FaGoogle style={{fontSize:"40px"}}/>
-                                    </div>
-                                    <div className='col-9 text-center'>
-                                        Google
-                                    </div>
-                                </div>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                
+                <SocialLogin
+                    title="registrarse con:"
+                    setError={setError}
+                    navigate={navigate}
+                    GoogleLogIn={loginWithGoogle}
+                    FacebookLogIn={loginWithFacebook}
+                />
             </div>
         </div>
     </div>

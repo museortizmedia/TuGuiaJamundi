@@ -3,12 +3,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
 
 import Pick from '../../Images/Brand/Pick.png';
-import { FaFacebook, FaGoogle} from 'react-icons/fa';
 
 import { useContextAuth } from '../../context/authContext';
 
 import Menu from '../../Components/Shared/Menu';
 import Footer from '../../Components/Shared/Footer'
+import SocialLogin from './socialogin';
 export const Login = () => {
 //variables
     const {login, loginWithGoogle, loginWithFacebook, recoverPassword} = useContextAuth();
@@ -28,7 +28,7 @@ export const Login = () => {
     const onHandleChange = ({target:{name, value}}) =>{
         setUser({...user, [name]:value}) //sobreescribe el objeto user reemplazando la clave name por valor value del input
     }
-
+    //al enviar formulario de login
     const onSubmit = async (e) => { //se escribe async porque llamaremos una funcion backend de firebase
         console.log(user.form_login__email, user.form_login__password)
         e.preventDefault(); //cancela evento de reenvio para que no se refresque la página
@@ -39,7 +39,7 @@ export const Login = () => {
             setError(error.code)
         }
     }
-
+    //al presionar boton de recuperar contraseña
     const handledRecover = async () =>{
         if(!user.form_login__email) return setError("Escribe tu correo electrónico en la parte correspondiente")
         try {
@@ -54,24 +54,6 @@ export const Login = () => {
                     setError("No encontramos usuarios con este correo")
                     break;
             }            
-        }        
-    }
-
-    const handledGoogleLogIn = async () =>{
-       try {
-            await loginWithGoogle();
-            navigate("/")
-       } catch (error) {
-            setError(error.message)
-       }        
-    }
-
-    const handledFacebookLogIn = async () =>{
-        try {
-            await loginWithFacebook();
-            navigate("/")    
-        } catch (error) {
-            setError(error.message)
         }        
     }
 
@@ -109,35 +91,13 @@ return (
                             <span className='m-2 p-2'><button className='btn btn-link text-primary' onClick={handledRecover}>Recuperar contraseña</button></span>
                         </div>
                     
-
-                    <div className='container w-100 my-5'>
-                        <div className='row'>
-                            <div className='col-12 col-xlg'>
-                                <button className='btn btn-outline-primary w-100 my-1' onClick={handledFacebookLogIn}>
-                                    <div className='row align-items-center'>
-                                        <div className='col-3'>
-                                        <FaFacebook style={{fontSize:"41px"}}/>
-                                        </div>
-                                        <div className='col-9 text-center'>
-                                            Facebook
-                                        </div>
-                                    </div>
-                                </button>
-                            </div>
-                            <div className='col'>
-                                <button className='btn btn-outline-danger w-100 my-1' onClick={handledGoogleLogIn}>
-                                    <div className='row align-items-center'>
-                                        <div className='col-2'>
-                                        <FaGoogle style={{fontSize:"40px"}}/>
-                                        </div>
-                                        <div className='col-10 text-center'>
-                                            Google
-                                        </div>
-                                    </div>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    <SocialLogin
+                    setError={setError}
+                    navigate={navigate}
+                    GoogleLogIn={loginWithGoogle}
+                    FacebookLogIn={loginWithFacebook}
+                    />
+                    
                 </div>
             </div>
 
