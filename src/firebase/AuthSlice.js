@@ -8,7 +8,7 @@ export const authSlice = createSlice({
         email: null,
         displayName: null,
         photoUrl: null,
-        errorMessage: null
+        errorMessage: null  
     },
     reducers: {
         register: (state, action) => {
@@ -19,7 +19,10 @@ export const authSlice = createSlice({
         },
         checkingCredentials: (state, action) => {
             console.log('checking')
+        },
+        login: () =>{
+
         }
     }
 })
-export const {register, logout, checkingCredentials} = authSlice.actions;
+export const {login, register, logout, checkingCredentials} = authSlice.actions;

@@ -1,6 +1,8 @@
 import {Row, Col, Container} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+import { useContextAuth } from '../../context/authContext'
+
 import Menu from '../../Components/Shared/Menu'
 import Footer from '../../Components/Shared/Footer'
 import Banner from '../../Components/Inicio/Banner'
@@ -8,8 +10,18 @@ import Tarjeta from '../../Components/Inicio/tarjeta_negocio'
 import TarjetaTop from '../../Components/Inicio/tarjeta_top'
 //import { Upload } from '../../firebase/storage/upload'
 export const Index = () => {
+    const {user, loading, logout} = useContextAuth();
+
+    const handlelogout = async() => {
+        await logout()
+    }
+
+    if(loading) return <h1>loading...</h1>
+
     return (
     <>
+    {user&&<p>Welcome {user.displayName || user.email}</p>}
+    <button onClick={handlelogout}>logout</button>
     {/* MENU: el menu contiene el logo con un enlace a la pagina de inicio, enlaces a exploración del mapa, configuracion de negocio y foto del perfil negocio o inciar sesión según el caso */}
     <Menu/>
     {/*BANNER: una imagen y un filtro de búsqueda de negocios que filtrará el componente SITIOSBUSQUEDA*/}

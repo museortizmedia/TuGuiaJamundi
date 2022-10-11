@@ -3,7 +3,6 @@ import {auth} from './config';
 import { register } from './AuthSlice';
 
 export const registerAuth = (email, password ) => {
-    console.log('Estamos registrando a: '+email+'...')
     return async ( dispatch ) => {
         const response = await createUserWithEmailAndPassword(auth, email, password)
         if(response) {

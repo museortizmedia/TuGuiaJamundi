@@ -90,9 +90,18 @@ https://picsum.photos/2160/1080
   /*background-image: url('./Images/Login/fondo.jpeg');*/
   background-position: center center;
 }
+.bg-card{
+  background-color: #F9FBFC
+}
 
 /*ediciones bootstrap*/
+.btn-warning{
+  color: white!important;
+}
 .btn-outline-warning:hover{
+  color: white!important;
+}
+.btn-warning:hover{
   color: white!important;
 }
   /*editar important el color final del warning*/

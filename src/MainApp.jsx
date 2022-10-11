@@ -7,6 +7,7 @@ import Mapa from './Pages/Mapa/mapa';
 import Perfil from './Pages/Perfil/perfil';
 
 import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
+import { ProtectedRoute } from './Components/Shared/ProtectedRoute';
 
 export const MainApp = () => {
     return (
@@ -20,7 +21,11 @@ export const MainApp = () => {
                         <Route path='' element={<Mapa/>}/>
                         <Route path=':filtro' element={<Mapa/>}/>
                     </Route>
-                    <Route path="/perfil" element={<Perfil/>} />
+                    <Route path="/perfil" element={
+                        <ProtectedRoute>
+                            <Perfil/>
+                        </ProtectedRoute>
+                    } />
                     <Route path='/*' element={ <Navigate to='/'/>} />
             </Routes>
         </HashRouter>
