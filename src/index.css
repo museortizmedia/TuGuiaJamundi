@@ -22,6 +22,8 @@ https://picsum.photos/2160/1080
               user-select: none; /* Non-prefixed version, currently
                                     supported by Chrome, Edge, Opera and Firefox */
   }
+
+  /*Menu clases*/
 .menu_item {
   font-weight: bold!important;
   color: #555!important;
@@ -31,11 +33,17 @@ https://picsum.photos/2160/1080
 }
 .menu_item_footer {
   color: rgb(128, 128, 128)!important;
+  font-size: .9em!important;
   text-decoration: none!important;
 }
 .menu_item_footer:hover {
   color: rgb(73, 73, 73)!important;
 }
+.title_footer{
+  font-size: 1.1em!important;
+  font-weight: bold;
+}
+/*Index*/
 .una_linea{
   white-space: nowrap;
   overflow: hidden;
@@ -74,6 +82,7 @@ https://picsum.photos/2160/1080
   height:72px;
   cursor: pointer;
 }
+/*Mapa*/
 .mapa{
   border-radius: 30px;
   height: 80vh;
@@ -103,5 +112,8 @@ https://picsum.photos/2160/1080
 }
 .btn-warning:hover{
   color: white!important;
+}
+.disabled{
+  color: #000!important;
 }
   /*editar important el color final del warning*/

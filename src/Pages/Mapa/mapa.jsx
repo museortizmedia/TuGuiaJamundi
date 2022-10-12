@@ -18,7 +18,7 @@ export const Mapa = () => {
 
     return (
         <>
-        <Menu/>
+        <Menu currentPage='mapa'/>
         <Container fluid className="" style={{width: "85%"}}><Row>
         <Col className="col-6 mt-4">
             <div className="mapa shadow"/>

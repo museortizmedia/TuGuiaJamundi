@@ -1,71 +1,103 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import {Row, Col, Container} from 'react-bootstrap'
+import { useContextAuth } from '../../context/authContext'
+import { FaSignInAlt } from 'react-icons/fa';
+
 import 'bootstrap/dist/css/bootstrap.min.css'
+import Tooltip from 'react-bootstrap/Tooltip';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 
-export const Menu = ({selected}) => {
+export const Menu = ({currentPage=null}) => {
+    const {user, loading, logout} = useContextAuth(); 
 
-    const Activar_IniciarSesion = () => {
-        document.getElementById('sesion_active').classList.remove('d-none');
-        document.getElementById('sesion_noactive').classList.add('d-none');
-    }
-    const Cerrar_IniciarSesion = () => {
-        document.getElementById('sesion_active').classList.add('d-none');
-        document.getElementById('sesion_noactive').classList.remove('d-none');
-    }
-    const Ocultar_IniciarSesion = () => {
-        document.getElementById('btn_login').classList.add('d-none');
-    }
-    const Ocultar_Registros = () => {
-        document.getElementById('btn_register_sa').classList.add('d-none');
-        document.getElementById('btn_register').classList.add('d-none');
+    const handlelogout = async() => {
+        await logout()
     }
 
-    useEffect(() => {
-        switch(selected){
-            default:
-                break;
-            case "login":
-                Ocultar_IniciarSesion();
-                break;
-            case "register":
-                Cerrar_IniciarSesion()
-                Ocultar_Registros()
-                break;
-            case "user":
-                Activar_IniciarSesion();
-                break;
-        }
-    });
-
-    
+    if(loading) return <h1>loading...</h1>
+    if(currentPage===null) return <h1 className='text-danger'>menu error: seleccione la currentPage</h1>
 
     return (
-        <>
-        <Container fluid className="bg-trasparent p-2 navbar-expand-sm" style={{width: "95%"}}>
-        <Row className="mx-auto">
-            <Col xs={2} className="my-auto noselect">
+        <div className="container-fluid bg-trasparent p-2 mt-2 navbar-expand-sm" style={{width: "100%"}}>
+        <div className="row mx-auto noselect">
+
+            <div className="col-2 my-auto text-center ">
                 <a href='/TuGuiaJamundi/'>
                     <img src={require('../../Images/Brand/logo1080.png')} alt={"Logo"} style={{width: "120px"}}/>
                 </a>
-            </Col>
-            <Col xs={10} className="text-end my-auto d-none d-sm-block noselect">
-            <a id="btn_mapa" className="p-2 nav-item nav-link menu_item d-inline " href='/TuGuiaJamundi/#/mapa'>El Mapa</a>
-                <span id='sesion_noactive'>
-                    <a id="btn_register" className="p-2 nav-item nav-link menu_item d-inline" href='/TuGuiaJamundi/#/registrarse'>Registrarse</a>
-                    <a id="btn_login" className="p-2 nav-item nav-link menu_item d-inline" href='/TuGuiaJamundi/#/login'>Iniciar Sesión</a>
-                </span>
-                <span id='sesion_active' className='d-none'>
-                <a id="btn_register_sa" className="p-2 nav-item nav-link menu_item d-inline" href='/TuGuiaJamundi/#/registrarse'>Registrarse</a>
-                <a href='/'>
-                    <img className="p-2 nav-item nav-link menu_item d-inline" src={require('../../Images/Brand/User.png')} alt={"User"} title="cerrar sesión" style={{width: "60px"}} onClick={Cerrar_IniciarSesion}/>
-                </a>
-                </span>
+            </div>
+
+            <div className="col-10 text-end my-auto noselect">
+            <Link className={`p-2 nav-item nav-link menu_item d-inline
+            ${currentPage==='default' && 'disabled'}`}
+             to="/">
+                Inicio
+            </Link>
+            <Link className={`p-2 nav-item nav-link menu_item d-inline
+            ${currentPage==='mapa' && 'disabled'}`}
+             to="/mapa">
+                El Mapa
+            </Link>
+            {!user&&<>
+            <Link className={`p-2 nav-item nav-link menu_item d-inline
+            ${currentPage==='registrarse' && 'disabled'}`}
+             to="/registrarse">
+                Registrarse
+            </Link>
+            <Link className={`p-2 nav-item nav-link menu_item d-inline
+            ${currentPage==='login' && 'disabled'}`}
+             to="/login">
+                Iniciar Sesión
+            </Link>
+            </>}
+
+            {user&&<>
+                <OverlayTrigger
+                delay={{ hide: 450, show: 300 }}
+                overlay={(props) => (
+                <Tooltip {...props}>
+                    {"Ver perfil"}
+                </Tooltip>
+                )}
+                placement="bottom"
+                >
+                    <Link className={`p-2 nav-item nav-link menu_item d-inline
+                    ${currentPage==='perfil' && 'disabled'}`}
+                    to="/perfil">
+                        <img
+                        src={user.photoURL||""}
+                        alt=""
+                        style={{width: "40px", borderRadius:"10px"}}
+                        className="m-2 shadow"
+                    />
+                        {user.displayName||"Sin nombre"}
+                    </Link>           
+                </OverlayTrigger>
+            
+                <OverlayTrigger
+                delay={{ hide: 450, show: 300 }}
+                overlay={(props) => (
+                <Tooltip {...props}>
+                    {"Salir"}
+                </Tooltip>
+                )}
+                placement="bottom"
+                >
+                <button className={`p-2 btn btn-link nav-item nav-link menu_item d-inline
+            ${currentPage==='' && 'disabled'}`}
+                onClick={handlelogout}>
+                    <FaSignInAlt style={{fontSize:"20px"}}/>
+                </button>
+                </OverlayTrigger>
+            </>}
+            
+            </div>
                 
-            </Col>
-        </Row>
-        </Container>
-        </>
+                
+                
+            </div>
+        </div>
     )
 }
 export default Menu;

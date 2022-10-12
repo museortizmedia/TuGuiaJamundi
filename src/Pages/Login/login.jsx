@@ -8,7 +8,7 @@ import { useContextAuth } from '../../context/authContext';
 
 import Menu from '../../Components/Shared/Menu';
 import Footer from '../../Components/Shared/Footer'
-import SocialLogin from './socialogin';
+import SocialLogin from '../../Components/Shared/socialogin';
 export const Login = () => {
 //variables
     const {login, loginWithGoogle, loginWithFacebook, recoverPassword} = useContextAuth();
@@ -59,7 +59,7 @@ export const Login = () => {
 
 return (
     <>
-    <Menu selected="login"/>
+    <Menu currentPage="login"/>
     <div className='container w-75 mt-5 mb-5 rounded-4 shadow'>
             <div className='row'>
                 <div className='col bg_login_register rounded-4 me-4'></div>
