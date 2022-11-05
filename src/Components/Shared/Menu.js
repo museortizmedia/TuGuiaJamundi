@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { useContextAuth } from '../../context/authContext'
-import { FaSignInAlt } from 'react-icons/fa';
+import { FaSignInAlt, FaUser, FaUserCircle } from 'react-icons/fa';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Tooltip from 'react-bootstrap/Tooltip';
@@ -62,17 +62,26 @@ export const Menu = ({currentPage=null}) => {
                 )}
                 placement="bottom"
                 >
+                    {user.photoURL?
                     <Link className={`p-2 nav-item nav-link menu_item d-inline
                     ${currentPage==='perfil' && 'disabled'}`}
                     to="/perfil">
                         <img
-                        src={user.photoURL||""}
+                        src={user.photoURL}
                         alt=""
                         style={{width: "40px", borderRadius:"10px"}}
                         className="m-2 shadow"
                     />
                         {user.displayName||"Sin nombre"}
-                    </Link>           
+                    </Link>
+                    :
+                    <Link className={`p-2 nav-item nav-link menu_item d-inline
+                    ${currentPage==='perfil' && 'disabled'}`}
+                    to="/perfil">
+                        <FaUserCircle className='me-2' style={{fontSize:"40px"}}/>
+                        {user.displayName||"Sin nombre"}
+                    </Link>}
+
                 </OverlayTrigger>
             
                 <OverlayTrigger

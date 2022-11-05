@@ -46,10 +46,10 @@ return (
         <div className='col'>
             <button className='btn btn-outline-danger w-100 my-1' onClick={handledGoogleLogIn}>
                 <div className='row align-items-center'>
-                    <div className='col-2'>
+                    <div className='col-3'>
                         <FaGoogle style={{fontSize:"40px"}}/>
                     </div>
-                    <div className='col-10 text-center'>
+                    <div className='col-9 text-center'>
                         Google
                     </div>
                 </div>

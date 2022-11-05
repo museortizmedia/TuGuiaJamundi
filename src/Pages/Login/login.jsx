@@ -34,7 +34,8 @@ export const Login = () => {
         e.preventDefault(); //cancela evento de reenvio para que no se refresque la página
         setError(''); //resetea estilos
         try {
-            await login(user.form_login__email, user.form_login__password) //el await nos permite llamar el asincrno (contenido de la funcion de firebase)            
+            await login(user.form_login__email, user.form_login__password) //el await nos permite llamar el asincrno (contenido de la funcion de firebase)
+            navigate("/");           
         } catch (error) {
             setError(error.code)
         }
