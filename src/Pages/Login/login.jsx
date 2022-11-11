@@ -4,14 +4,14 @@ import { useNavigate } from 'react-router-dom';
 
 import Pick from '../../Images/Brand/Pick.png';
 
-import { useContextAuth } from '../../context/authContext';
+import { useContextFire } from '../../context/fireContext';
 
 import Menu from '../../Components/Shared/Menu';
 import Footer from '../../Components/Shared/Footer'
 import SocialLogin from '../../Components/Shared/socialogin';
 export const Login = () => {
 //variables
-    const {login, loginWithGoogle, loginWithFacebook, recoverPassword} = useContextAuth();
+    const {login, loginWithGoogle, loginWithFacebook, recoverPassword} = useContextFire();
     const navigate = useNavigate();
 
     //objeto user con claves email y contraseña del usuario que desea registrarse

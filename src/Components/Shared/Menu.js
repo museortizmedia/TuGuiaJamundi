@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { useContextAuth } from '../../context/authContext'
+import { useContextFire } from '../../context/fireContext'
 import { FaSignInAlt, FaUser, FaUserCircle } from 'react-icons/fa';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -9,7 +9,7 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 
 export const Menu = ({currentPage=null}) => {
-    const {user, loading, logout} = useContextAuth(); 
+    const {auth, user, loading, logout} = useContextFire(); 
 
     const handlelogout = async() => {
         await logout()
@@ -17,9 +17,15 @@ export const Menu = ({currentPage=null}) => {
 
     if(loading) return <h1>loading...</h1>
     if(currentPage===null) return <h1 className='text-danger'>menu error: seleccione la currentPage</h1>
-
     return (
         <div className="container-fluid bg-trasparent p-2 mt-2 navbar-expand-sm" style={{width: "100%"}}>
+
+        <button className={`p-2 btn btn-link nav-item nav-link menu_item d-inline
+    ${currentPage==='' && 'disabled'}`}
+        onClick={handlelogout}>
+            <FaSignInAlt style={{fontSize:"20px"}}/>
+        </button>
+
         <div className="row mx-auto noselect">
 
             <div className="col-2 my-auto text-center ">

@@ -9,13 +9,13 @@ import { store } from './firebase/store';
 */
 
 import MainApp from './MainApp';
-import { AuthProvider } from './context/authContext';
+import { FireProvider } from './context/fireContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-<AuthProvider> {/*<Provider store={store}> authoritation firebase*/}
+<FireProvider> {/*<Provider store={store}> authoritation firebase*/}
   <React.StrictMode>
     <MainApp/>
   </React.StrictMode>
-</AuthProvider>
+</FireProvider>
 );

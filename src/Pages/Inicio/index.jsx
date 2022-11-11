@@ -1,16 +1,34 @@
+import { useEffect, useState } from 'react'
 import {Row, Col, Container} from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
+
+import { useContextFire } from '../../context/fireContext'
 
 import Menu from '../../Components/Shared/Menu'
 import Footer from '../../Components/Shared/Footer'
 import Banner from '../../Components/Inicio/Banner'
 import Tarjeta from '../../Components/Inicio/tarjeta_negocio'
 import TarjetaTop from '../../Components/Inicio/tarjeta_top'
+import { logRoles } from '@testing-library/react'
+
+
 //import { Upload } from '../../firebase/storage/upload'
 export const Index = () => {
+
+    const {auth, user, registrarAuth} = useContextFire();
+
+    useEffect(()=>{
+        window.scrollTo(0, 0);
+        //if(auth && !user) async() => {await registrarAuth(auth)}
+    },[])
+
     return (
     <>
-    
+    {
+    auth && user ? <>{auth?"true":"false"}{user?"true":"false"}<h1>Autenticado y registrado</h1></> :
+    user ? <>{auth?"true":"false"}{user?"true":"false"}<h1>Autenticado, pero no registrado{user}</h1></> :
+    auth? <>{auth?"true":"false"}{user?"true":"false"}<h1>no registrado{user}</h1></> :
+    <>{auth?"true":"false"}{user?"true":"false"}<h1>no autenticado{user}</h1></>
+    }
     {/* MENU: el menu contiene el logo con un enlace a la pagina de inicio, enlaces a exploración del mapa, configuracion de negocio y foto del perfil negocio o inciar sesión según el caso */}
     <Menu currentPage={'default'}/> 
     {/*BANNER: una imagen y un filtro de búsqueda de negocios que filtrará el componente SITIOSBUSQUEDA*/}

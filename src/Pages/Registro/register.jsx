@@ -6,7 +6,7 @@ import Pick from '../../Images/Brand/Pick.png';
 
 //import { useDispatch } from 'react-redux';
 //import { registerAuth } from '../../firebase/Thunks';
-import { useContextAuth } from '../../context/authContext';
+import { useContextFire } from '../../context/fireContext';
 
 
 import Menu from '../../Components/Shared/Menu';
@@ -15,7 +15,7 @@ import SocialLogin from '../../Components/Shared/socialogin';
 
 export const Registro = () => {
 //variables
-    const {singup, loginWithFacebook, loginWithGoogle} = useContextAuth();
+    const {singup, loginWithFacebook, loginWithGoogle} = useContextFire();
     //const dispatch = useDispatch();
     const navigate = useNavigate();
 
