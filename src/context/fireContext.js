@@ -1,6 +1,6 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 //importaciones auth
-import { fireauth, firestorage, firedb } from "../firebase/config";
+import { fireauth, /*firestorage,*/ firedb } from "../firebase/config";
 import {
     onAuthStateChanged,
     createUserWithEmailAndPassword,
@@ -11,24 +11,23 @@ import {
     signOut,
     sendPasswordResetEmail
 } from 'firebase/auth';
-import {
+/*import {
     ref,
     uploadBytes,
     getDownloadURL,
     getBytes
-} from 'firebase/storage';
+} from 'firebase/storage';*/
 import {
     collection,
-    addDoc,
+    /*addDoc,*/
     getDoc,
     setDoc,
-    deleteDoc,
+    /*deleteDoc,*/
     doc,
     getDocs,
     query,
     where
   } from 'firebase/firestore';
-import { async } from "@firebase/util";
 
 
 //context contiene los valores del contexto para ser utilizados desde cualquier componente
@@ -71,10 +70,10 @@ export const FireProvider = ({children}) =>{
     /*storage*/
 
     /*db*/
-    const userExist = async(uid) => {
-        const docRef = doc(firedb, "usuarios", uid);
+    const userExist = async(userid) => {
+        if(!userid)return false;
+        const docRef = doc(firedb, "usuarios", userid);
         const res = await getDoc(docRef);
-        //console.log(res.exists());
         return res.exists();
     }
 
@@ -89,54 +88,71 @@ export const FireProvider = ({children}) =>{
         return collectionables.length>0? true : null;
     }
 
-    const registrarAuth = (auth) => {
-        registrarUser(
-            {displayName: auth.displayName, photoURL: auth.photoURL, email: auth.email}
-        );
-    }
-
-    const registrarUser = async(elauth) => {
+    const registrarUser = async(user) => {
         try {
-            const collectionRef = doc(firedb, 'usuarios');
-            const docRef = doc(collectionRef, elauth.uid)
-            setUser(elauth);
-            await setDoc(docRef, elauth);
-            console.log('usuario registrado')
-        } catch (error) { }
+            const newUser = {
+                uid: user.uid,
+                email: user.email,
+                displayName: user.displayName,
+                photoURL: user.photoURL,
+                portada: null,
+                bio: null,
+                nivel: 0,
+            }
+            await setDoc(doc(firedb, "usuarios", user.uid), newUser);
+            setUser(newUser)
+        } catch (error) { console.log('no se puedo registrar el usuario: '+error) }
     }
-
+    const getUserInfo = async(userId) => {
+        const docRef = doc(firedb, "usuarios", userId);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            //console.log("Document data:", docSnap.data());
+            return {...docSnap.data()};
+        } else {
+            console.log("No such document!");
+            return null;
+        }
+    }
+/*
     const updateUser = async(user) => {
         try {
             const collectionRef = doc(firedb, 'usuarios');
             const docRef = doc(collectionRef, user.uid)
             await setDoc(docRef, user);
         } catch (error) { }
-    }
+    }*/
 
+    //cambio estado del auth
     useEffect(()=>{
         const unsubscribe = onAuthStateChanged(fireauth, async currentUser =>{
             setAuth(currentUser);
-            if(currentUser!=null){
-                const isRegister = await userExist(currentUser.uid)
-                if(!isRegister)
+            if(currentUser) {
+                const register = await userExist(currentUser.uid)
+                if(register){
+                    console.log("usuario autorizado y registrado")
+                    //setUser(await getUserInfo(currentUser.uid))
+                }
+                else
                 {
-                    setUser(currentUser);
+                    console.log("usuario autorizado y no registrado")
+                    await registrarUser(currentUser)
                 }
             }
-            //console.log(currentUser)
             SetLoading(false);
         })
         return () => unsubscribe();
     },[])
 
     return <fireContext.Provider value={{
+        //vars
+        auth, loading,
         //auth
-        auth, loading, singup, login, loginWithGoogle, loginWithFacebook, logout, recoverPassword,
+        singup, login, loginWithGoogle, loginWithFacebook, logout, recoverPassword,
         //storage
               
         //bd
         userExist,
-        registrarAuth,
-        updateUser
+        getUserInfo
     }}>{children}</fireContext.Provider>
 }

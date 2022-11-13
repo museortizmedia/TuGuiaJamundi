@@ -34,9 +34,9 @@ function Footer() {
                         <span className='title_footer'>Redes</span>
                         <ul className='list-unstyled'>
                             <li style={{fontSize: "1.8em"}}>
-                                <a rel="noreferrer" target="_blank" href="https://www.facebook.com/muse.ortiz/" className="menu_item_footer p-2"><FaFacebook/></a>
-                                <a rel="noreferrer" target="_blank" href="https://www.instagram.com/muse_times/" className="menu_item_footer p-2"><FaInstagram/></a>
-                                <a rel="noreferrer" target="_blank" href="https://github.com/museortizmedia" className="menu_item_footer p-2"><FaGit/></a>
+                                <a rel="noopener noreferrer" target="_blank" href="https://www.facebook.com/muse.ortiz/" className="menu_item_footer p-2"><FaFacebook/></a>
+                                <a rel="noopener noreferrer" target="_blank" href="https://www.instagram.com/muse_times/" className="menu_item_footer p-2"><FaInstagram/></a>
+                                <a rel="noopener noreferrer" target="_blank" href="https://github.com/museortizmedia" className="menu_item_footer p-2"><FaGit/></a>
                             </li>
                         </ul>
                     </div>

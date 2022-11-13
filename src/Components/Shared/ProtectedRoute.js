@@ -1,9 +1,11 @@
+import React from 'react';
 import { useContextFire } from "../../context/fireContext";
 import { Navigate } from "react-router-dom";
+import LoadingComponent from "./Loading";
 
 export const ProtectedRoute = ({children}) =>{
-const {user, loading} = useContextFire();
-if(loading) return <h1>Loading...</h1>
-if(!user) return <Navigate to="/login"/>
+const {auth, loading} = useContextFire();
+if(loading) return <LoadingComponent/>
+if(!auth) return <Navigate to="/login"/>
 return <>{children}</>
 }

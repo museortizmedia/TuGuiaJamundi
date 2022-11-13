@@ -1,15 +1,15 @@
+import React from 'react';
 //import {useSearchParams} from "react-router-dom";
-import { useParams, useSearchParams } from 'react-router-dom';
-import { FaSearch, FaCompass, FaTags } from 'react-icons/fa';
+import { useParams, /*useSearchParams*/ } from 'react-router-dom';
+import { FaSearch, FaCompass} from 'react-icons/fa';
 
-import { InputGroup} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 import Menu from '../../Components/Shared/Menu'
 import Footer from '../../Components/Shared/Footer'
 export const Mapa = () => {
     const {filtro} = useParams()
-    const [params] = useSearchParams()
+    //const [params] = useSearchParams()
 
     const Buscar = () => {
         document.getElementById('search').placeholder="Buscar un sitio nuevo...";

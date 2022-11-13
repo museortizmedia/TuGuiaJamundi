@@ -1,3 +1,4 @@
+import React from 'react';
 import {Row, Col, Container, InputGroup} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 

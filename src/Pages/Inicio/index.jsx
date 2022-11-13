@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import {Row, Col, Container} from 'react-bootstrap'
 
 import { useContextFire } from '../../context/fireContext'
@@ -8,27 +8,22 @@ import Footer from '../../Components/Shared/Footer'
 import Banner from '../../Components/Inicio/Banner'
 import Tarjeta from '../../Components/Inicio/tarjeta_negocio'
 import TarjetaTop from '../../Components/Inicio/tarjeta_top'
-import { logRoles } from '@testing-library/react'
+import { useEffect } from 'react'
 
 
 //import { Upload } from '../../firebase/storage/upload'
 export const Index = () => {
 
-    const {auth, user, registrarAuth} = useContextFire();
+    const {auth, user, getUserInfo} = useContextFire();
 
     useEffect(()=>{
-        window.scrollTo(0, 0);
-        //if(auth && !user) async() => {await registrarAuth(auth)}
+        
     },[])
-
+    
     return (
     <>
-    {
-    auth && user ? <>{auth?"true":"false"}{user?"true":"false"}<h1>Autenticado y registrado</h1></> :
-    user ? <>{auth?"true":"false"}{user?"true":"false"}<h1>Autenticado, pero no registrado{user}</h1></> :
-    auth? <>{auth?"true":"false"}{user?"true":"false"}<h1>no registrado{user}</h1></> :
-    <>{auth?"true":"false"}{user?"true":"false"}<h1>no autenticado{user}</h1></>
-    }
+    {/*<button type="button" onClick={async() => await getUserInfo(auth.uid)}>Click Me!</button>*/}
+
     {/* MENU: el menu contiene el logo con un enlace a la pagina de inicio, enlaces a exploración del mapa, configuracion de negocio y foto del perfil negocio o inciar sesión según el caso */}
     <Menu currentPage={'default'}/> 
     {/*BANNER: una imagen y un filtro de búsqueda de negocios que filtrará el componente SITIOSBUSQUEDA*/}
@@ -71,7 +66,7 @@ export const Index = () => {
             <div className='' style={{overflow: "auto",width: "100%", height: "40vh"}}>
                 <TarjetaTop img="https://mui.kitchen/__export/1601953024234/sites/muikitchen/img/2020/10/05/9_cholado_1.jpg_1339198041.jpg" sitio="El Parque del Cholado" desc="El único y original cholado de jamundí desde $12.000"/>
                 <TarjetaTop img="https://www.municipios.com.co/sitiosturisticos/20150222111434.jpg" sitio="Monumento a la vida" desc="Homenaje a las 11 personas asesinadas por el ejército, construida por Héctor Lombara"/>
-                <TarjetaTop img="https://lh3.ggpht.com/p/AF1QipNVRAmqAAuFbtqjWB6nkcPMmlN1J5Yd1fQNCmAc=s512" sitio="Hades Rugby" desc="Participa de los entrenos del único club de Rugby de Jamundí"/>
+                <TarjetaTop img="" sitio="Hades Rugby" desc="Participa de los entrenos del único club de Rugby de Jamundí"/>
             </div>
         </Col>
     </Row></Container>

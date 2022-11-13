@@ -30,7 +30,7 @@ export const Login = () => {
     }
     //al enviar formulario de login
     const onSubmit = async (e) => { //se escribe async porque llamaremos una funcion backend de firebase
-        console.log(user.form_login__email, user.form_login__password)
+        //console.log(user.form_login__email, user.form_login__password)
         e.preventDefault(); //cancela evento de reenvio para que no se refresque la página
         setError(''); //resetea estilos
         try {
