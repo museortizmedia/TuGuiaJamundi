@@ -43,7 +43,8 @@ export const useContextFire = () =>{
 export const FireProvider = ({children}) =>{
     //datos del contexto:
     const [auth, setAuth] = useState(null);
-    const [user, setUser] = useState(null);
+    //const [user, setUser] = useState(null);
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
     const [loading, SetLoading] = useState(true)
     
     //funciones de contexto
@@ -71,7 +72,7 @@ export const FireProvider = ({children}) =>{
 
     /*db*/
     const userExist = async(userid) => {
-        if(!userid)return false;
+        if(userid===null)return false;
         const docRef = doc(firedb, "usuarios", userid);
         const res = await getDoc(docRef);
         return res.exists();
@@ -88,30 +89,29 @@ export const FireProvider = ({children}) =>{
         return collectionables.length>0? true : null;
     }
 
-    const registrarUser = async(user) => {
+    const registrarUser = async(thisuser) => {
         try {
             const newUser = {
-                uid: user.uid,
-                email: user.email,
-                displayName: user.displayName,
-                photoURL: user.photoURL,
-                portada: null,
-                bio: null,
+                uid: thisuser.uid,
+                email: thisuser.email,
+                displayName: thisuser.displayName,
+                photoURL: thisuser.photoURL,
+                portada: '',
+                bio: '',
                 nivel: 0,
+                empresa: false,
             }
-            await setDoc(doc(firedb, "usuarios", user.uid), newUser);
-            setUser(newUser)
+            await setDoc(doc(firedb, "usuarios", newUser.uid), newUser);
+            setUser({...newUser})
         } catch (error) { console.log('no se puedo registrar el usuario: '+error) }
     }
     const getUserInfo = async(userId) => {
         const docRef = doc(firedb, "usuarios", userId);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-            //console.log("Document data:", docSnap.data());
-            return {...docSnap.data()};
-        } else {
-            console.log("No such document!");
-            return null;
+            console.log("recuperado:", docSnap.data());
+            setUser( {...user,...docSnap.data()} );
+            
         }
     }
 /*
@@ -130,23 +130,39 @@ export const FireProvider = ({children}) =>{
             if(currentUser) {
                 const register = await userExist(currentUser.uid)
                 if(register){
-                    console.log("usuario autorizado y registrado")
-                    //setUser(await getUserInfo(currentUser.uid))
+                    console.log("usuario autorizado y registrado: "/*+JSON.stringify(currentUser)*/)
+                    if(!user){
+                        //getUserInfo(currentUser.uid)
+                    }/*else{
+                        console.log('ya en chache: '+JSON.stringify(user));
+                        SetLoading(false);
+                    }*/
                 }
                 else
                 {
                     console.log("usuario autorizado y no registrado")
                     await registrarUser(currentUser)
                 }
+            }else{
+                console.log('se cerro sesion')
+                //localStorage.removeItem('user');
+                SetLoading(false);
             }
-            SetLoading(false);
+            
         })
         return () => unsubscribe();
     },[])
 
+    useEffect(()=>{
+        if(user){
+            localStorage.setItem('user', JSON.stringify(user))  
+            SetLoading(false);
+        }        
+    },[user])
+
     return <fireContext.Provider value={{
         //vars
-        auth, loading,
+        auth, user, loading,
         //auth
         singup, login, loginWithGoogle, loginWithFacebook, logout, recoverPassword,
         //storage

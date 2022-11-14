@@ -84,13 +84,14 @@ export const Menu = ({currentPage=null}) => {
                     to="/perfil">
                         {!auth.photoURL? <FaUserCircle className="m-2 pr-2" size={44}/> : 
                         <img
+                        referrerPolicy='no-referrer'
                         src={user?user.photoURL: auth.photoURL}
                         alt=""
                         style={{width: "40px", borderRadius:"10px"}}
                         className="m-2 pr-2 shadow"
                         />}
 
-                        {auth.displayName? user?user.displayName:auth.displayName:"Sin nombre"}
+                        {auth.displayName? user?user.displayName:auth.displayName:auth.email.split("@")[0]}
                     </Link>
                     
 

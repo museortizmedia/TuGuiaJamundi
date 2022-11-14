@@ -26,6 +26,16 @@ https://picsum.photos/2160/1080
       background-color: #FAE529;
     }
 /*end scroll personalizado*/
+.hidescroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hidescroll {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+/*ocultar scroll*/
 .shadow-none {
   box-shadow: none!important;
 }
