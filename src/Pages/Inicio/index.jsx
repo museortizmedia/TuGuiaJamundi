@@ -1,20 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import {Row, Col, Container} from 'react-bootstrap'
 
-import { useContextFire } from '../../context/fireContext'
+//import { useContextFire } from '../../context/fireContext'
 
 import Menu from '../../Components/Shared/Menu'
 import Footer from '../../Components/Shared/Footer'
 import Banner from '../../Components/Inicio/Banner'
 import Tarjeta from '../../Components/Inicio/tarjeta_negocio'
 import TarjetaTop from '../../Components/Inicio/tarjeta_top'
-import { useEffect } from 'react'
 
 
-//import { Upload } from '../../firebase/storage/upload'
 export const Index = () => {
 
-    const {auth, user, getUserInfo} = useContextFire();
+    //const {auth, user, getUserInfo} = useContextFire();
 
     useEffect(()=>{
         
@@ -22,8 +20,6 @@ export const Index = () => {
     
     return (
     <>
-    {/*<button type="button" onClick={async() => await getUserInfo(auth.uid)}>Click Me!</button>*/}
-
     {/* MENU: el menu contiene el logo con un enlace a la pagina de inicio, enlaces a exploración del mapa, configuracion de negocio y foto del perfil negocio o inciar sesión según el caso */}
     <Menu currentPage={'default'}/> 
     {/*BANNER: una imagen y un filtro de búsqueda de negocios que filtrará el componente SITIOSBUSQUEDA*/}
@@ -72,7 +68,6 @@ export const Index = () => {
     </Row></Container>
     {/* FOOTER */}
     <Footer/>
-    {/*<Upload/>*/}
     </>
     )
 }

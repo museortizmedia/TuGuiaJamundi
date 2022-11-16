@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 //importaciones auth
-import { fireauth, /*firestorage,*/ firedb } from "../firebase/config";
+import { fireauth, /*firestorage,*/ firedb, firestorage } from "../firebase/config";
 import {
     onAuthStateChanged,
     createUserWithEmailAndPassword,
@@ -11,12 +11,12 @@ import {
     signOut,
     sendPasswordResetEmail
 } from 'firebase/auth';
-/*import {
+import {
     ref,
     uploadBytes,
     getDownloadURL,
-    getBytes
-} from 'firebase/storage';*/
+    /*getBytes*/
+} from 'firebase/storage';
 import {
     collection,
     /*addDoc,*/
@@ -26,7 +26,8 @@ import {
     doc,
     getDocs,
     query,
-    where
+    where,
+    GeoPoint
   } from 'firebase/firestore';
 
 
@@ -43,8 +44,8 @@ export const useContextFire = () =>{
 export const FireProvider = ({children}) =>{
     //datos del contexto:
     const [auth, setAuth] = useState(null);
-    //const [user, setUser] = useState(null);
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+    const [user, setUser] = useState(null);
+    //const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
     const [loading, SetLoading] = useState(true)
     
     //funciones de contexto
@@ -69,6 +70,47 @@ export const FireProvider = ({children}) =>{
     const recoverPassword = (email) =>  sendPasswordResetEmail(fireauth, email)
 
     /*storage*/
+    const setProfilePic = async(archivo) =>{
+        try {
+            const archivoRef= ref(firestorage, user.uid+'/photoURL');
+            await uploadBytes(archivoRef, archivo)
+            const urlArchivo = await getDownloadURL(archivoRef);
+            /*const tempUser = {...user}
+            tempUser[`${tipo}`] = urlArchivo;
+            setUser(tempUser);*/
+            return urlArchivo;            
+        } catch (error) {
+            return error;
+        }        
+    }
+
+    const setPortada = async(archivo) =>{
+        try {
+            const archivoRef= ref(firestorage, user.uid+'/portada');
+            await uploadBytes(archivoRef, archivo)
+            const urlArchivo = await getDownloadURL(archivoRef);
+            /*const tempUser = {...user}
+            tempUser[`${tipo}`] = urlArchivo;
+            setUser(tempUser);*/
+            return urlArchivo;            
+        } catch (error) {
+            return error;
+        }        
+    }
+
+    const subirPhoto = async(archivo) =>{
+        try {
+            const archivoRef= ref(firestorage, user.uid+`/fotos/${archivo.name}`);
+            await uploadBytes(archivoRef, archivo)
+            const urlArchivo = await getDownloadURL(archivoRef);
+            /*const tempUser = {...user}
+            tempUser[`${tipo}`] = urlArchivo;
+            setUser(tempUser);*/
+            return urlArchivo;            
+        } catch (error) {
+            return error;
+        }        
+    }
 
     /*db*/
     const userExist = async(userid) => {
@@ -94,34 +136,44 @@ export const FireProvider = ({children}) =>{
             const newUser = {
                 uid: thisuser.uid,
                 email: thisuser.email,
-                displayName: thisuser.displayName,
-                photoURL: thisuser.photoURL,
-                portada: '',
-                bio: '',
-                nivel: 0,
-                empresa: false,
+                displayName: thisuser.displayName||"",
+                photoURL: thisuser.photoURL||"",
+                portada: thisuser.portada||"",
+                bio: thisuser.bio||"",
+                nivel: thisuser.nivel||1,
+                empresa: thisuser.empresa||false,
+                contacto: thisuser.contacto||[],
+                tags: thisuser.tags||[],
+                map: thisuser.map||new GeoPoint(0, 0),
             }
             await setDoc(doc(firedb, "usuarios", newUser.uid), newUser);
             setUser({...newUser})
         } catch (error) { console.log('no se puedo registrar el usuario: '+error) }
     }
+
+    const setUserInfo = async(userId) => {
+        const docRef = doc(firedb, "usuarios", userId);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            //console.log("recuperado:", docSnap.data());
+            setUser( {...user,...docSnap.data()} );
+        }
+    }
+
     const getUserInfo = async(userId) => {
         const docRef = doc(firedb, "usuarios", userId);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-            console.log("recuperado:", docSnap.data());
-            setUser( {...user,...docSnap.data()} );
-            
+            return{...docSnap.data()}            
         }
     }
-/*
-    const updateUser = async(user) => {
+    const updateUser = async(newuser) => {
         try {
-            const collectionRef = doc(firedb, 'usuarios');
-            const docRef = doc(collectionRef, user.uid)
-            await setDoc(docRef, user);
-        } catch (error) { }
-    }*/
+            await setDoc(doc(firedb, "usuarios", newuser.uid), newuser);
+            setUser({...newuser})
+            console.log('perfil actualizado')
+        } catch (error) { console.log(error)}
+    }
 
     //cambio estado del auth
     useEffect(()=>{
@@ -132,7 +184,7 @@ export const FireProvider = ({children}) =>{
                 if(register){
                     console.log("usuario autorizado y registrado: "/*+JSON.stringify(currentUser)*/)
                     if(!user){
-                        //getUserInfo(currentUser.uid)
+                        setUserInfo(currentUser.uid)
                     }/*else{
                         console.log('ya en chache: '+JSON.stringify(user));
                         SetLoading(false);
@@ -155,7 +207,7 @@ export const FireProvider = ({children}) =>{
 
     useEffect(()=>{
         if(user){
-            localStorage.setItem('user', JSON.stringify(user))  
+            //localStorage.setItem('user', JSON.stringify(user))  
             SetLoading(false);
         }        
     },[user])
@@ -166,9 +218,14 @@ export const FireProvider = ({children}) =>{
         //auth
         singup, login, loginWithGoogle, loginWithFacebook, logout, recoverPassword,
         //storage
-              
+        setProfilePic,
+        setPortada,
+        subirPhoto,
         //bd
         userExist,
-        getUserInfo
+        setUserInfo,
+        getUserInfo,
+        existQUERY,
+        updateUser
     }}>{children}</fireContext.Provider>
 }

@@ -23,14 +23,17 @@ export const MainApp = () => {
                         <Route path='' element={<Mapa/>}/>
                         <Route path=':filtro' element={<Mapa/>}/>
                     </Route>
-                    <Route path="/perfil" element={
+                    {/*<Route path="/perfil" element={
                         <ProtectedRoute>
                             <Perfil/>
                         </ProtectedRoute>
-                    } />
-                    <Route path="/ajustes" element={
-                        <Ajustes/>
-                    } />
+                    } />*/}
+                    <Route path="/perfil">
+                        <Route path=':userID' element={<ProtectedRoute><Perfil/></ProtectedRoute>}/>
+                        <Route path='me' element={<ProtectedRoute><Perfil/></ProtectedRoute>}/>
+                    </Route>
+                    <Route path="/ajustes" element={<Ajustes/>}>
+                    </Route>
                     <Route path='/*' element={ <Navigate to='/'/>} />
             </Routes>
         </HashRouter>

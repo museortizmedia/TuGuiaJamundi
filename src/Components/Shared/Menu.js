@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useContextFire } from '../../context/fireContext'
-import { FaSignInAlt, FaUserCircle} from 'react-icons/fa';
+import { FaSignOutAlt, FaUserCircle} from 'react-icons/fa';
 import LoadingComponent from './Loading';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -81,17 +81,23 @@ export const Menu = ({currentPage=null}) => {
                 >
                     <Link className={`p-2 nav-item nav-link menu_item d-inline
                     ${currentPage==='perfil' && 'disabled'}`}
-                    to="/perfil">
-                        {!auth.photoURL? <FaUserCircle className="m-2 pr-2" size={44}/> : 
+                    to="/perfil/me">
+                        {!user.photoURL && !auth.photoURL?
+                        <FaUserCircle className="m-2 pr-2" size={44}/>
+                        : 
                         <img
                         referrerPolicy='no-referrer'
-                        src={user?user.photoURL: auth.photoURL}
+                        src={user.photoURL?user.photoURL:auth.photoURL}
                         alt=""
                         style={{width: "40px", borderRadius:"10px"}}
                         className="m-2 pr-2 shadow"
                         />}
 
-                        {auth.displayName? user?user.displayName:auth.displayName:auth.email.split("@")[0]}
+                        {
+                        !user.displayName && !auth.displayName?
+                        auth.email.split("@")[0]
+                        :
+                        user.displayName? user.displayName:auth.displayName}
                     </Link>
                     
 
@@ -109,7 +115,7 @@ export const Menu = ({currentPage=null}) => {
                 <button className={`p-2 btn btn-link nav-item nav-link menu_item d-inline
             ${currentPage==='' && 'disabled'}`}
                 onClick={handlelogout}>
-                    <FaSignInAlt style={{fontSize:"25px"}}/>
+                    <FaSignOutAlt style={{fontSize:"25px"}}/>
                 </button>
                 </OverlayTrigger>
             </>}

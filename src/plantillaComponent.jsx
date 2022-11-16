@@ -1,5 +1,5 @@
-import Menu from '../../Components/Shared/Menu';
-import Footer from '../../Components/Shared/Footer'
+import Menu from './Components/Shared/Menu';
+import Footer from './Components/Shared/Footer'
 export const PerfilPersona = () => {
     return (
         <>
