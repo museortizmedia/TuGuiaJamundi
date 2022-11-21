@@ -8,6 +8,7 @@ import Footer from '../../Components/Shared/Footer'
 import Banner from '../../Components/Inicio/Banner'
 import Tarjeta from '../../Components/Inicio/tarjeta_negocio'
 import TarjetaTop from '../../Components/Inicio/tarjeta_top'
+import { Link } from 'react-router-dom'
 
 
 export const Index = () => {
@@ -21,7 +22,10 @@ export const Index = () => {
     return (
     <>
     {/* MENU: el menu contiene el logo con un enlace a la pagina de inicio, enlaces a exploración del mapa, configuracion de negocio y foto del perfil negocio o inciar sesión según el caso */}
-    <Menu currentPage={'default'}/> 
+    <Menu currentPage={'default'}/>
+    <Link to="/perfil/xobgyMkkgZe3g2NwR0pqbzqxocn2">asd</Link>
+    <Link to="/perfil/EQViylWbyrdptZG2F1d5NlLK2P02">asd</Link>
+    
     {/*BANNER: una imagen y un filtro de búsqueda de negocios que filtrará el componente SITIOSBUSQUEDA*/}
     <Banner/>
     {/* SITIOSBUSQUEDA: 3 cartas con los resultados mas cercanos a la búsqueda realizada, por defecto ejecuta una búsqueda aleatoria, tiene un boton ver mas que abrirá la exploración del mapa con la busqueda realizada para ver todo el contenido*/}

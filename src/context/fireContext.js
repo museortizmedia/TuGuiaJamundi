@@ -15,11 +15,11 @@ import {
     ref,
     uploadBytes,
     getDownloadURL,
-    /*getBytes*/
+    listAll,
 } from 'firebase/storage';
 import {
     collection,
-    /*addDoc,*/
+    addDoc,
     getDoc,
     setDoc,
     /*deleteDoc,*/
@@ -27,7 +27,7 @@ import {
     getDocs,
     query,
     where,
-    GeoPoint
+    GeoPoint,
   } from 'firebase/firestore';
 
 
@@ -45,6 +45,7 @@ export const FireProvider = ({children}) =>{
     //datos del contexto:
     const [auth, setAuth] = useState(null);
     const [user, setUser] = useState(null);
+    const [prod, setProd] = useState(null);
     //const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
     const [loading, SetLoading] = useState(true)
     
@@ -98,18 +99,42 @@ export const FireProvider = ({children}) =>{
         }        
     }
 
-    const subirPhoto = async(archivo) =>{
+    const subirPhotoProducto = async(archivo, name) =>{
         try {
-            const archivoRef= ref(firestorage, user.uid+`/fotos/${archivo.name}`);
+            const archivoRef= ref(firestorage, user.uid+`/productos/${name}`);
             await uploadBytes(archivoRef, archivo)
             const urlArchivo = await getDownloadURL(archivoRef);
-            /*const tempUser = {...user}
-            tempUser[`${tipo}`] = urlArchivo;
-            setUser(tempUser);*/
             return urlArchivo;            
         } catch (error) {
             return error;
         }        
+    }
+
+    const subirFoto = async(archivo, name) =>{
+        try {
+            const archivoRef= ref(firestorage, user.uid+`/fotos/${name}`);
+            await uploadBytes(archivoRef, archivo)
+            const urlArchivo = await getDownloadURL(archivoRef);
+            return urlArchivo;            
+        } catch (error) {
+            return error;
+        }        
+    }
+
+    const getFotos = async() =>{
+        const archivosRef= ref(firestorage, user.uid+`/fotos`);
+        listAll(archivosRef)
+        .then((res) => {
+            res.prefixes.forEach((folderRef) => {
+            // All the prefixes under listRef.
+            // You may call listAll() recursively on them.
+            });
+            res.items.forEach((itemRef) => {
+            // All the items under listRef.
+            });
+        }).catch((error) => {
+            // Uh-oh, an error occurred!
+        });
     }
 
     /*db*/
@@ -171,8 +196,66 @@ export const FireProvider = ({children}) =>{
         try {
             await setDoc(doc(firedb, "usuarios", newuser.uid), newuser);
             setUser({...newuser})
-            console.log('perfil actualizado')
+            //console.log('perfil actualizado')
         } catch (error) { console.log(error)}
+    }
+
+    const addProduct = async(userId, producto) => {
+        try {
+            const LosProductos = [...await getProd(userId)||[], producto]
+            setProd(LosProductos);
+            await setDoc(doc(firedb, "productos", userId), {productos:LosProductos});
+            
+        } catch (error) { console.log('no se puedo registrar el producto: '+error) }
+    }
+
+    const getProd = async(userId) =>{
+        const docRef = doc(firedb, "productos", userId);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            const prodOBJ = {...docSnap.data()}
+            return prodOBJ.productos;       
+        }
+    }
+
+    const addCalif = async(empresaid, calif, myuser) => {
+
+        try {
+            const antiguasCalif = await getCalif(empresaid)||{};
+            const calificaciones = [...antiguasCalif, calif];
+  
+            let ArregloStars = myuser.stars;
+            ArregloStars[calif.estrellas - 1] = ArregloStars[calif.estrellas - 1]+1;
+            const newuser = {...myuser, stars: ArregloStars};
+            await updateUser(newuser);
+
+            await setDoc(doc(firedb, "calificaciones", empresaid), {opiniones: calificaciones});
+            
+        } catch (error) { console.log('no se pudo registrar la calificacion: '+error) }
+    }
+
+    const getCalif = async(empresaId) =>{
+        const docRef = doc(firedb, "calificaciones", empresaId);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            const prodOBJ = {...docSnap.data()}
+            //console.log('encontrado: '+JSON.stringify(prodOBJ.opiniones))
+            return prodOBJ.opiniones;    
+        } else return [];
+    }
+
+    const isCalif = async(empresaId, userid) =>{
+        let comentario = null;
+        const docRef = doc(firedb, "calificaciones", empresaId);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            const prodOBJ = {...docSnap.data()}
+            const arreglo = prodOBJ.opiniones;
+            for (var i = 0; i < arreglo.length; i++) {
+                if(arreglo[i]["autor"]===userid)comentario=arreglo[i];
+            }
+        }
+        return comentario;
     }
 
     //cambio estado del auth
@@ -182,9 +265,10 @@ export const FireProvider = ({children}) =>{
             if(currentUser) {
                 const register = await userExist(currentUser.uid)
                 if(register){
-                    console.log("usuario autorizado y registrado: "/*+JSON.stringify(currentUser)*/)
+                    //console.log("usuario autorizado y registrado: "/*+JSON.stringify(currentUser)*/)
                     if(!user){
                         setUserInfo(currentUser.uid)
+                        setProd(await getProd(currentUser.uid))
                     }/*else{
                         console.log('ya en chache: '+JSON.stringify(user));
                         SetLoading(false);
@@ -192,11 +276,11 @@ export const FireProvider = ({children}) =>{
                 }
                 else
                 {
-                    console.log("usuario autorizado y no registrado")
+                    //console.log("usuario autorizado y no registrado")
                     await registrarUser(currentUser)
                 }
             }else{
-                console.log('se cerro sesion')
+                //console.log('se cerro sesion')
                 //localStorage.removeItem('user');
                 SetLoading(false);
             }
@@ -214,18 +298,23 @@ export const FireProvider = ({children}) =>{
 
     return <fireContext.Provider value={{
         //vars
-        auth, user, loading,
+        auth, user, prod, loading,
         //auth
         singup, login, loginWithGoogle, loginWithFacebook, logout, recoverPassword,
         //storage
         setProfilePic,
         setPortada,
-        subirPhoto,
+        subirPhotoProducto,
         //bd
         userExist,
         setUserInfo,
         getUserInfo,
         existQUERY,
-        updateUser
+        updateUser,
+        addProduct,
+        getProd,
+        addCalif,
+        getCalif,
+        isCalif,
     }}>{children}</fireContext.Provider>
 }

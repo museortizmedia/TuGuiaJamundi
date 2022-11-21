@@ -87,9 +87,9 @@ export const Menu = ({currentPage=null}) => {
                         : 
                         <img
                         referrerPolicy='no-referrer'
-                        src={user.photoURL?user.photoURL:auth.photoURL}
+                        src={user.photoURL?user.photoURL:auth.photoURL||'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'}
                         alt=""
-                        style={{width: "40px", borderRadius:"10px"}}
+                        style={{width: "40px", height:"40px", borderRadius:"10px", objectFit:"cover"}}
                         className="m-2 pr-2 shadow"
                         />}
 

@@ -32,7 +32,7 @@ export const MainApp = () => {
                         <Route path=':userID' element={<ProtectedRoute><Perfil/></ProtectedRoute>}/>
                         <Route path='me' element={<ProtectedRoute><Perfil/></ProtectedRoute>}/>
                     </Route>
-                    <Route path="/ajustes" element={<Ajustes/>}>
+                    <Route path="/ajustes" element={<ProtectedRoute><Ajustes/></ProtectedRoute>}>
                     </Route>
                     <Route path='/*' element={ <Navigate to='/'/>} />
             </Routes>

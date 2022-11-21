@@ -8,21 +8,58 @@ import LoadingComponent from '../../Components/Shared/Loading';
 
 import { useContextFire } from '../../context/fireContext';
 import { FaEdit, FaUserCircle } from 'react-icons/fa';
+import { GeoPoint } from 'firebase/firestore';
 
 export const Ajustes = () => {
 
     const[page, setPage] = useState(1);
     
-    const {user, updateUser, setProfilePic, setPortada} = useContextFire();
+    const {user, updateUser, setProfilePic, setPortada,
+        prod, addProduct, subirPhotoProducto, getProd} = useContextFire();
     const [ajustes, setAjustes] = useState({})
+    const [productos, setProductos] = useState(prod)
+    //ref page1
     const fileRefProfile = useRef();
     const fileRefPortada = useRef();
     const imgRefProfile = useRef();
     const imgRefPortada = useRef();
+    //ref page2
+    const cuentaRefOld = useRef();
+    const cuentaRefNew = useRef();
+    const cuentaRefNew2 = useRef();  
+    //ref page3
+    //ref page4
+    const contacRefDir = useRef();
+    const contacRefTel = useRef();
+    const contacRefCel = useRef();
+    const contacRefOpen = useRef();
+    const contacRefLoc = useRef();
+    //ref page5
+    const[prodTitle, setProdTitle] = useState('');
+    const[prodDesc, setProdDesc] = useState('');
+    const[prodPrice, setProdPrice] = useState('');
+    const prodRefImgInput = useRef();
+    const[prodImg, setProdImg] = useState('');
+    const[prodImgLink, setProdImgLink] = useState('');
 
-    useEffect(()=>{
-        //console.log(ajustes)
-    },[ajustes])
+    const addProducto = async(e)=>{
+        e.preventDefault();    
+        const producto = {name: prodTitle, desc: prodDesc, price: prodPrice};
+        if(prodImg) {producto['pic']=prodImg}
+        else if (prodImgLink) { producto['pic'] = await subirPhotoProducto(prodRefImgInput.current.files[0], "producto-"+productos.length+"_"+prodRefImgInput.current.files[0].name)}
+        
+        await addProduct(user.uid, producto);
+        resetProd();
+    }
+    const resetProd= ()=>{
+        setProdTitle('');
+        setProdDesc('');
+        setProdPrice('');
+        prodRefImgInput.current.value=''; 
+        setProdImg('');
+        setProdImgLink('');
+    }
+    //ref page6
 
     useEffect(()=>{
         //console.log(page)
@@ -35,19 +72,29 @@ export const Ajustes = () => {
     }
 
     const handleActualizar = async(page) =>{
+        var nAjustes = {...ajustes};
+        var newUser = {}
         switch(page){
             case 1:
-                const nAjustes = {...ajustes}
                 //comprobar si hay cargados imágenes
                 if(fileRefProfile.current.files.length>0){
                 nAjustes["photoURL"] = await setProfilePic(fileRefProfile.current.files[0])}
                 if(fileRefPortada.current.files.length>0){
                     nAjustes["portada"] = await setPortada(fileRefPortada.current.files[0])}
-                const newUser = {...user, ...nAjustes}
+                newUser = {...user, ...nAjustes}
                 await updateUser(newUser);
             break;
             case 4:
-                console.log('traer datos info en objeto, actualizar obj contacto de user')
+                const contacto = [];
+                contacto[0] = contacRefDir.current.value||'';
+                contacto[1] = contacRefTel.current.value||'';
+                contacto[2] = contacRefCel.current.value||'';
+                contacto[3] = contacRefOpen.current.value||'';
+                contacto[4] = contacRefLoc.current.value? new GeoPoint(contacRefLoc.current.value.split(", ")[0],contacRefLoc.current.value.split(", ")[1]) : new GeoPoint(0,0);
+                nAjustes["contacto"] = [ ...contacto];
+                newUser = {...user, ...nAjustes}
+                console.log(JSON.stringify(newUser))
+                await updateUser(newUser);
             break;
             default:
             break;
@@ -57,9 +104,10 @@ export const Ajustes = () => {
 
     const handleChangeFile = (e) =>{
         const archivolocal = e.target.files[0];
-        const urlimage = URL.createObjectURL(archivolocal)
-        if(e.target.name==='photoURL'){imgRefProfile.current.src = urlimage}else{ imgRefPortada.current.src = urlimage}
-            /*Convertir en arreglo de bits (codificar archivos) */
+        const urlimage = URL.createObjectURL(archivolocal)||"";
+        if(e.target.name==='photoURL'){imgRefProfile.current.src = urlimage
+        }else{ imgRefPortada.current.src = urlimage}
+        /*Convertir en arreglo de bits (codificar archivos) */
         /*const files = e.target.files;
         const fileReader = new FileReader();
         if(fileReader && files && files.length > 0){
@@ -102,8 +150,7 @@ export const Ajustes = () => {
                     <img className='img-fluid aling-self-center'
                     src={user.photoURL}
                     alt=''
-
-                    style={{height:"70%",borderRadius:"1000px"}}/>
+                    style={{height:"80px",width:"80px",objectFit:"cover",borderRadius:"1000px"}}/>
                     :
                     <FaUserCircle style={{fontSize:"5em"}}/>
                     }
@@ -176,8 +223,10 @@ export const Ajustes = () => {
                         src={user.photoURL?user.photoURL:"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png"}
                         alt=''
                         style={{
-                            width:"65%",                        
+                            width:"100px",
+                            height:"100px",                     
                             borderRadius: "1000px",
+                            objectFit:"cover",
                             position: "relative",
                         }}
                         />
@@ -201,15 +250,15 @@ export const Ajustes = () => {
                     />
                     <button onClick={()=>{if(fileRefPortada.current){fileRefPortada.current.click()}}}><FaEdit/></button>
                     <input className='d-none' name="portada" ref={fileRefPortada} type='file' accept="image/*" onChange={handleChangeFile}/>
-
+                    
                     
                 </div>
-                    {user.empresa?<div className='row'>
+                    {user.empresa===true?<div className='row'>
                     <span className='title_footer d-block'>Etiquetas</span>
                         <textarea title='agrege las etiquetas de su negocio separada por comas'></textarea>
                     </div>:null}
 
-                    {!user.empresa&&<p className='text-muted'>Todos los campos son opciones y usted puede eliminar la información en cualquier momento</p>}
+                    {!user.empresa===true?<p className='text-muted'>Todos los campos son opciones y usted puede eliminar la información en cualquier momento</p>:null}
                     <button className='btn btn-warning' onClick={() => handleActualizar(1)}>Actualizar</button>
 
                 </div>}
@@ -269,16 +318,21 @@ export const Ajustes = () => {
                 height:"80vh",
                 backgroundColor:"#F9FBFC",
                 }}>
+    
+    
+    
+    
+    
                     <span className='title_footer d-block'>Dirección del negocio</span>
-                    <input placeholder={user.contacto[0]||""}></input>
+                    <input ref={contacRefDir} defaultValue={user["contacto"]?user.contacto[0]:""}></input>
                     <span className='title_footer d-block'>Teléfono del negocio</span>
-                    <input placeholder={user.contacto[1]||""}></input>
+                    <input ref={contacRefTel} defaultValue={user["contacto"]?user.contacto[1]:""}></input>
                     <span className='title_footer d-block'>Teléfono Celular</span>
-                    <input placeholder={user.contacto[2]||""}></input>
+                    <input ref={contacRefCel} defaultValue={user["contacto"]?user.contacto[2]:""}></input>
                     <span className='title_footer d-block'>Horario de atención</span>
-                    <input placeholder={user.contacto[3]||""}></input>
+                    <input ref={contacRefOpen} defaultValue={user["contacto"]?user.contacto[3]:""}></input>
                     <span className='title_footer d-block'>Ubicación de tu negocio</span>
-                    <input placeholder={user.contacto[4]||""}></input>
+                    <input ref={contacRefLoc} defaultValue={user["contacto"]?user.contacto[4].latitude+", "+user.contacto[4].longitude:""}></input>
 
                     <button className='btn btn-warning' onClick={()=>handleActualizar(4)}>Actualizar</button>
             </div>}
@@ -292,13 +346,18 @@ export const Ajustes = () => {
                     <span className='title_footer d-block'>Tu vitrina</span>
                     <p className='text-muted'>Administra tus productos desde aquí.</p>
                     <span className='title_footer d-block'>Productos</span>
+
+                    {prod.length}
+
                     <span className='title_footer d-block'>Nuevo producto</span>
-                    <input placeholder="titulo"></input>
-                    <input placeholder='descripción del producto'></input>
-                    <input placeholder='precio del producto'></input>
-                    <button>Agregar</button>
-                    <input placeholder='enlace de la imagen'></input>
-                    <button>subir foto</button>
+                    <input onChange={(e)=>setProdTitle(e.target.value)} value={prodTitle} placeholder='Nombre Producto'/>
+                    <textarea onChange={(e)=>setProdDesc(e.target.value)} value={prodDesc} placeholder='Descripcion producto'/>
+                    <input onChange={(e)=>setProdPrice(e.target.value)} value={prodPrice} type={'number'} placeholder='Precio'/>
+                    <img src={prodImg?prodImg:prodImgLink||''} alt='' height='100px' style={{objectFit:"cover"}}/>
+                    <input onChange={(e)=>setProdImg(e.target.value)} value={prodImg} placeholder='enlace de fotografía'/>
+                    <button onClick={()=>{if(prodRefImgInput.current){prodRefImgInput.current.click()}}}>subir foto</button>
+                    <input className='d-none' name="pic" ref={prodRefImgInput} type={'file'} accept="image/*" onChange={(e)=>{ setProdImgLink(URL.createObjectURL(e.target.files[0])); setProdImg(''); } }/>
+                    <button onClick={addProducto}>Agregar</button>
             </div>}
 
             {/* fotos */}
