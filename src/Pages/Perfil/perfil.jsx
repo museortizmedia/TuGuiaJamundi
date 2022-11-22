@@ -13,7 +13,7 @@ import TabProd from '../../Components/Perfil/Tab/Produc';
 import TabMapa from '../../Components/Perfil/Tab/Mapa';
 
 import { useContextFire } from '../../context/fireContext'
-import { FaCog, FaStar } from 'react-icons/fa';
+import { FaCog } from 'react-icons/fa';
 import { Link, useParams } from 'react-router-dom';
 import OpinionStar from '../../Components/Shared/stars';
 import Calificar from '../../Components/Shared/opiniones';
@@ -24,7 +24,7 @@ export const Perfil = () => {
     const[editMode, setEditMode] = useState(false);
     const[localMenu, setMenu] = useState(1);
 
-    const {user, userExist, getUserInfo, getProd, addCalif, getCalif, isCalif} = useContextFire();
+    const {user, userExist, getUserInfo, getProd, addCalif, getCalif, isCalif, getFotos} = useContextFire();
 
     useEffect(()=>{
         const getInfo = async() => {
@@ -103,7 +103,7 @@ export const Perfil = () => {
         {localMenu===1&&<TabInfo profile={profile} editMode={editMode}/>}
         {localMenu===2&&<TabOpinion profile={profile} editMode={editMode}/>}
         {localMenu===3&&<TabProd profile={profile} editMode={editMode} getProd={getProd}/>}
-        {localMenu===4&&<TabFoto profile={profile} editMode={editMode}/>}
+        {localMenu===4&&<TabFoto profile={profile} editMode={editMode} getFotos={getFotos}/>}
         {localMenu===5&&<TabMapa profile={profile} editMode={editMode}/>}
         
         {(profile.empresa===true&&localMenu!==2)&&
@@ -113,7 +113,7 @@ export const Perfil = () => {
                 <div className='row d-flex aling-item-center'>
                     <span className='col-1 text-dark fw-bolder d-inline' style={{fontSize:"1.5em"}}>5</span>
                     <span className='col-7 ms-2 d-inline' style={{Height:"0.5em",backgroundColor:"#D9D9D9",position:"relative",zIndex:"10"}} >
-                        <span className='col-7 h-100 d-inline' style={{Height:"0.5em",width:`${profile.stars?profile.stars[4]!=0?profile.stars[4]*100/(profile.stars[0]+profile.stars[1]+profile.stars[2]+profile.stars[3]+profile.stars[4])+'%':"0px":null}`, backgroundColor:"#FFD541",position:"absolute",top:"0px",left:"0px",zIndex:"100"}}/>
+                        <span className='col-7 h-100 d-inline' style={{Height:"0.5em",width:`${profile.stars?profile.stars[4]!==0?profile.stars[4]*100/(profile.stars[0]+profile.stars[1]+profile.stars[2]+profile.stars[3]+profile.stars[4])+'%':"0px":null}`, backgroundColor:"#FFD541",position:"absolute",top:"0px",left:"0px",zIndex:"100"}}/>
                     </span>                    
                     <span className='col-1 d-inline'>{profile.stars?profile.stars[4]:"0"}</span>
                 </div>
@@ -121,7 +121,7 @@ export const Perfil = () => {
                 <div className='row d-flex aling-item-center'>
                     <span className='col-1 text-dark fw-bolder d-inline' style={{fontSize:"1.5em"}}>4</span>
                     <span className='col-7 ms-2 d-inline' style={{Height:"0.5em",backgroundColor:"#D9D9D9",position:"relative",zIndex:"10"}} >
-                        <span className='col-7 h-100 d-inline' style={{Height:"0.5em",width:`${profile.stars?profile.stars[3]!=0?profile.stars[3]*100/(profile.stars[0]+profile.stars[1]+profile.stars[2]+profile.stars[3]+profile.stars[4])+'%':"0px":null}`,backgroundColor:"#FFD541",position:"absolute",top:"0px",left:"0px",zIndex:"100"}}/>
+                        <span className='col-7 h-100 d-inline' style={{Height:"0.5em",width:`${profile.stars?profile.stars[3]!==0?profile.stars[3]*100/(profile.stars[0]+profile.stars[1]+profile.stars[2]+profile.stars[3]+profile.stars[4])+'%':"0px":null}`,backgroundColor:"#FFD541",position:"absolute",top:"0px",left:"0px",zIndex:"100"}}/>
                     </span>
                     <span className='col-1 d-inline'>{profile.stars?profile.stars[3]:"0"}</span>
                 </div>
@@ -129,7 +129,7 @@ export const Perfil = () => {
                 <div className='row d-flex aling-item-center'>
                     <span className='col-1 text-dark fw-bolder d-inline' style={{fontSize:"1.5em"}}>3</span>
                     <span className='col-7 ms-2 d-inline' style={{Height:"0.5em",backgroundColor:"#D9D9D9",position:"relative",zIndex:"10"}} >
-                        <span className='col-7 h-100 d-inline' style={{Height:"0.5em",width:`${profile.stars?profile.stars[2]!=0?profile.stars[2]*100/(profile.stars[0]+profile.stars[1]+profile.stars[2]+profile.stars[3]+profile.stars[4])+'%':"0px":null}`,backgroundColor:"#FFD541",position:"absolute",top:"0px",left:"0px",zIndex:"100"}}/>
+                        <span className='col-7 h-100 d-inline' style={{Height:"0.5em",width:`${profile.stars?profile.stars[2]!==0?profile.stars[2]*100/(profile.stars[0]+profile.stars[1]+profile.stars[2]+profile.stars[3]+profile.stars[4])+'%':"0px":null}`,backgroundColor:"#FFD541",position:"absolute",top:"0px",left:"0px",zIndex:"100"}}/>
                     </span>
                     <span className='col-1 d-inline'>{profile.stars?profile.stars[2]:"0"}</span>
                 </div>
@@ -137,7 +137,7 @@ export const Perfil = () => {
                 <div className='row d-flex aling-item-center'>
                     <span className='col-1 text-dark fw-bolder d-inline' style={{fontSize:"1.5em"}}>2</span>
                     <span className='col-7 ms-2 d-inline' style={{Height:"0.5em",backgroundColor:"#D9D9D9",position:"relative",zIndex:"10"}} >
-                        <span className='col-7 h-100 d-inline' style={{Height:"0.5em",width:`${profile.stars?profile.stars[1]!=0?profile.stars[1]*100/(profile.stars[0]+profile.stars[1]+profile.stars[2]+profile.stars[3]+profile.stars[4])+'%':"0px":null}`,backgroundColor:"#FFD541",position:"absolute",top:"0px",left:"0px",zIndex:"100"}}/>
+                        <span className='col-7 h-100 d-inline' style={{Height:"0.5em",width:`${profile.stars?profile.stars[1]!==0?profile.stars[1]*100/(profile.stars[0]+profile.stars[1]+profile.stars[2]+profile.stars[3]+profile.stars[4])+'%':"0px":null}`,backgroundColor:"#FFD541",position:"absolute",top:"0px",left:"0px",zIndex:"100"}}/>
                     </span>
                     <span className='col-1 d-inline'>{profile.stars?profile.stars[1]:"0"}</span>
                 </div>
@@ -145,7 +145,7 @@ export const Perfil = () => {
                 <div className='row d-flex aling-item-center'>
                     <span className='col-1 text-dark fw-bolder d-inline' style={{fontSize:"1.5em"}}>1</span>
                     <span className='col-7 ms-2 d-inline' style={{Height:"0.5em",backgroundColor:"#D9D9D9",position:"relative",zIndex:"10"}} >
-                        <span className='col-7 h-100 d-inline' style={{Height:"0.5em",width:`${profile.stars?profile.stars[0]!=0?profile.stars[0]*100/(profile.stars[0]+profile.stars[1]+profile.stars[2]+profile.stars[3]+profile.stars[4])+'%':"0px":null}`,backgroundColor:"#FFD541",position:"absolute",top:"0px",left:"0px",zIndex:"100"}}/>
+                        <span className='col-7 h-100 d-inline' style={{Height:"0.5em",width:`${profile.stars?profile.stars[0]!==0?profile.stars[0]*100/(profile.stars[0]+profile.stars[1]+profile.stars[2]+profile.stars[3]+profile.stars[4])+'%':"0px":null}`,backgroundColor:"#FFD541",position:"absolute",top:"0px",left:"0px",zIndex:"100"}}/>
                     </span>
                     <span className='col-1 d-inline'>{profile.stars?profile.stars[0]:"0"}</span>
                 </div>

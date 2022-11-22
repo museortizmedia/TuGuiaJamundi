@@ -195,6 +195,25 @@ textarea.tagger{
   color: #FFD541;
 }
 
+.plus-añadir{
+  color: #DAD8D1;
+  font-size: 5em;
+  cursor: pointer;
+}
+.plus-añadir:hover{ color: #f3f2ed; font-size: 6em;}
+
+.bg-fotoviewer{
+  background-color: rgba(0,0,0,.9);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 1000;
+  overscroll-behavior: contain;
+}
+.bg-fotoviewer .hide {
+  display: none!important;
+}
+
 /*ediciones bootstrap*/
 .btn-warning{
   color: white!important;

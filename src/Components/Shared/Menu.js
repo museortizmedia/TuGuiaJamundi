@@ -36,7 +36,7 @@ export const Menu = ({currentPage=null}) => {
     )
     //menu retorno defecto
     return (
-        <div className="container-fluid bg-trasparent p-2 mt-2 navbar-expand-sm" style={{width: "100%"}}>
+        <div className="container-fluid bg-trasparent pt-3 pb-3 p-2 navbar-expand-sm" style={{width: "100%"}}>
         <div className="row mx-auto noselect" style={{width: "95%"}}>
 
             <div className="col-2 my-auto">
@@ -87,10 +87,10 @@ export const Menu = ({currentPage=null}) => {
                         : 
                         <img
                         referrerPolicy='no-referrer'
-                        src={user.photoURL?user.photoURL:auth.photoURL||'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'}
+                        src={user.photoURL?user.photoURL||'':auth.photoURL||'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'}
                         alt=""
                         style={{width: "40px", height:"40px", borderRadius:"10px", objectFit:"cover"}}
-                        className="m-2 pr-2 shadow"
+                        className="m-2 pr-2 shadow-sm"
                         />}
 
                         {

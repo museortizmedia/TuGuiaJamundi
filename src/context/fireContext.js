@@ -19,7 +19,7 @@ import {
 } from 'firebase/storage';
 import {
     collection,
-    addDoc,
+    /*addDoc,*/
     getDoc,
     setDoc,
     /*deleteDoc,*/
@@ -125,6 +125,7 @@ export const FireProvider = ({children}) =>{
         const archivosRef= ref(firestorage, user.uid+`/fotos`);
         listAll(archivosRef)
         .then((res) => {
+            console.log(res);
             res.prefixes.forEach((folderRef) => {
             // All the prefixes under listRef.
             // You may call listAll() recursively on them.
@@ -305,6 +306,8 @@ export const FireProvider = ({children}) =>{
         setProfilePic,
         setPortada,
         subirPhotoProducto,
+        subirFoto,
+        getFotos,
         //bd
         userExist,
         setUserInfo,

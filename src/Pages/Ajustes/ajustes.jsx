@@ -5,10 +5,12 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Menu from '../../Components/Shared/Menu'
 import Footer from '../../Components/Shared/Footer'
 import LoadingComponent from '../../Components/Shared/Loading';
+import FotoViewer from '../../Components/Shared/fotoviewer';
 
 import { useContextFire } from '../../context/fireContext';
 import { FaEdit, FaUserCircle } from 'react-icons/fa';
 import { GeoPoint } from 'firebase/firestore';
+
 
 export const Ajustes = () => {
 
@@ -60,6 +62,10 @@ export const Ajustes = () => {
         setProdImgLink('');
     }
     //ref page6
+    const[fotolink, setFotolink] = useState(null);
+    const[fototitle, setFotoT] = useState('');
+    const[fotodesc, setFotoDesc] = useState('');
+    const[fotos, setFotos] = useState(null);
 
     useEffect(()=>{
         //console.log(page)
@@ -132,11 +138,19 @@ export const Ajustes = () => {
         }
     }
 
+    const subirFotos = async() =>{
+        if(fototitle!=''||fotodesc!=''){
+            console.log(fototitle+fotodesc)
+
+        }else{alert('necesitas un titulo y una descripción de la imagen')}
+    }
+
 
     if(!user) return <LoadingComponent/>
     return (
         <>
-        <Menu currentPage='ajustes'/>
+        <FotoViewer/>
+        <Menu currentPage='ajustes'/>        
         <div className='d-flex justify-content-center noselect'>
         <div className='row' style={{width:"95%"}}>
             <div className='col-4 m-4 p-2'>
@@ -318,11 +332,7 @@ export const Ajustes = () => {
                 height:"80vh",
                 backgroundColor:"#F9FBFC",
                 }}>
-    
-    
-    
-    
-    
+
                     <span className='title_footer d-block'>Dirección del negocio</span>
                     <input ref={contacRefDir} defaultValue={user["contacto"]?user.contacto[0]:""}></input>
                     <span className='title_footer d-block'>Teléfono del negocio</span>
@@ -369,12 +379,15 @@ export const Ajustes = () => {
                     <span className='title_footer d-block'>Tus fotos</span>
                     <p className='text-muted'>Agrega fotos a tu galería para que la gente conozca de tu negocio.</p>
                     <span className='title_footer d-block'>Fotografias</span>
+                    {fotos?"fotos":"fotos"}
                     <span className='title_footer d-block'>Nueva fotografía</span>
-                    <input placeholder="Título de la imagen"></input>
-                    <input placeholder='Descripción de la imagen...'></input>
-                    <button>Agregar</button>
-                    <input placeholder='Enlace de la imagen'></input>                    
-                    <button>subir foto</button>
+                    <input className='form-control p-2' placeholder="Título de la imagen" style={{height:"3em"}} value={fototitle} onChange={(e)=>{setFotoT(e.target.value)}} ></input>
+                    <input className='form-control p-2' placeholder='Descripción de la imagen...' style={{height:"3em"}} value={fotodesc} onChange={(e)=>{setFotoDesc(e.target.value)} } ></input>
+                    <div className="btn-group" style={{height:"3em"}}>
+                        <button className='btn btn-warning btn-sm' onClick={()=>{document.getElementById('foto_input').click()}}>Agregar</button>
+                        <input id="foto_input" className='d-none' type='file' onChange={ (e)=>{setFotolink(e.target.files[0])} }/>                   
+                        <button className='btn btn-warning btn-sm' disabled={fotolink?false:true} onClick={subirFotos}>subir foto</button>
+                    </div>
             </div>}
 
         </div>
