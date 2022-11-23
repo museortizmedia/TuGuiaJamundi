@@ -19,19 +19,7 @@ export const ProfileBanner = ({profile, editMode, changePic}) => {
     position: "relative",
     }}>
         {editMode===true&&
-        <span style={{
-                    height: "40px",
-                    width:"40px",
-                    borderRadius:"40px",
-                    backgroundColor:"rgba(103,103,103,.7)",
-                    zIndex:100,
-                    position: "absolute",
-                    bottom: "10px",
-                    right:"20px",
-                    fontSize:"1.2em",
-                }}
-                title={'cambiar foto de portada'}
-            ><Link to={'/ajustes'}><FaPlus className="text-white"/></Link></span>
+        <div className="rounded-circle d-flex justify-content-center align-items-center" style={{height: "40px",width:"40px",backgroundColor:"#D9D9D9",zIndex:100,position: "absolute",bottom: "10px",right:"20px"}} title={"cambiar foto de portada"} ><Link className="text-reset" to={'/ajustes'}><FaPlus style={{height: "35px",width:"35px",fill:"#9B9B9B"}}/></Link></div>
         }
 
         <div className='shadow'
@@ -70,19 +58,7 @@ export const ProfileBanner = ({profile, editMode, changePic}) => {
             }} />
             }
             {editMode===true&&
-            <span style={{
-                height: "40px",
-                width:"40px",
-                borderRadius:"40px",
-                backgroundColor:"rgba(103,103,103,.7)",
-                zIndex:100,
-                position: "absolute",
-                bottom: "8px",
-                left: "0px",
-                fontSize:"1.2em",
-            }}
-            title={'cambiar foto de perfil'}
-        ><Link to={'/ajustes'}><FaPlus className="text-white"/></Link></span>
+            <div className="rounded-circle d-flex justify-content-center align-items-center" style={{height: "40px",width:"40px",backgroundColor:"#D9D9D9",zIndex:100,position: "absolute",bottom: "10px",left:"0px"}} title={"editar foto de portada"} ><Link className="text-reset" to={'/ajustes'}><FaPlus style={{height: "35px",width:"35px",fill:"#9B9B9B"}}/></Link></div>
             }
             <div style={{
                     height: "40px",

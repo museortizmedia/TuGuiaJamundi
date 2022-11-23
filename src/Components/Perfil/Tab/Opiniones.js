@@ -1,7 +1,36 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { FaCrown } from "react-icons/fa";
+import LoadingComponent from "../../Shared/Loading";
+import OpinionStar from "../../Shared/stars";
 
-export const TabOpinion = ({profile, editMode}) => {
+export const TabOpinion = ({profile, editMode, getCalif, getUserInfo}) => {
+    const [opiniones, setopin] = useState(null);
+    const [opinionesViewer, setOV] = useState([]);
+
+    useEffect(()=>{
+        if(!opiniones){
+            const rellenarOpiniones = async()=>{
+                setopin(await getCalif(profile.uid));
+            }
+        rellenarOpiniones();}
+    },[])
+
+    useEffect(()=>{
+        const rellenarInfoUser = async(lista) =>{
+            let res = []
+            for(var i=0;i<lista.length;i++)
+            {
+                const obj = {...lista[i], userinfo: await getUserInfo(lista[i].autor)}
+                res.push(obj);
+            }
+            setOV(res);
+        }
+        if(opiniones!=null){
+            rellenarInfoUser(opiniones);
+    }},[opiniones])
+    
+
+    if(opinionesViewer.length>0)
     return (
         <>
         <div id="opinion" className='w-100 col d-flex justify-content-center noselect'>
@@ -21,8 +50,27 @@ export const TabOpinion = ({profile, editMode}) => {
                 <hr/>
             </div>
             <div>
-                <div>opinion 1</div>
-                <div>opinion 2</div>
+                {opinionesViewer.map((item, key)=>
+
+                <div className="row w-100 mb-2" key={key}>
+                <div className="col-4">
+                    <div className="bg-enterpriseGradient" style={{height:"100px",width:"100px",position:"relative",borderRadius:"100px"}}>
+                        <img className="shadow"
+                        src={item.userinfo.photoURL||""}
+                        height='90px' width='90px'
+                        alt=''
+                        style={{objectFit:"cover", borderRadius:"40px",position: "absolute",top:"5%",left:"5%"}}
+                        />
+                    </div>
+                </div>
+      
+                <div className="col-8 text-start">
+                    <div className="row"> <div className="p-0 una_linea"><span className="fw-bolder lh-1 me-2" style={{color:"#303030", fontSize:"1.2em"}}>{item.userinfo.displayName}</span> <OpinionStar forcestar={item.estrellas}/></div> </div>
+                    <div className="row h-75" style={{overflowY:"auto"}}>{item.texto}</div>
+                </div>
+                </div>
+                )}
+
             </div>
         </div>
 
@@ -70,5 +118,7 @@ export const TabOpinion = ({profile, editMode}) => {
     </div>
         </>
     )
+    return <LoadingComponent/>
 }
+
 export default TabOpinion;

@@ -51,7 +51,7 @@ export const AnimatedInput = ({placeholder_animado}) => {
 
     const Buscar = () => {
         if(document.getElementById('search').value===""){
-            //navigate("/TuGuiaJamundi/#/mapa");
+            //navigate("/TuGuiaJamundi/#/mapa"); 
         }else{
             navigate("/mapa/"+document.getElementById('search').value);
         }

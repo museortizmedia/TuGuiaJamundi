@@ -48,9 +48,10 @@ export const TabProd = ({profile, editMode, getProd}) => {
                 :null
                 }
 
-                <div className="ms-2 me-2 mb-1 bg-white border border-0 shadow-sm d-flex align-items-center justify-content-center" style={{height:"60%",width:"30%",padding:"0px"}}>
+                {editMode?
+                <div className="ms-2 me-2 mb-1 bg-white border border-0 shadow-sm d-flex align-items-center justify-content-center" style={{height:"70%",width:"30%",padding:"0px"}}>
                         <Link to='/ajustes'> <FaPlusCircle className="plus-añadir"/> </Link>
-                </div>
+                </div>:null}
 
                 </div>
             </div>

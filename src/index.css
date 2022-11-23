@@ -178,6 +178,17 @@ tag_filter::before:no(button){content: "#";}
   /*background-image: url('./Images/Login/fondo.jpeg');*/
   background-position: center center;
 }
+.marcadores svg g path{
+  fill: #FAE529;
+  stroke: #fff;
+}
+
+.marcadores svg g circle{
+  fill: #fff;
+}
+
+
+
 .bg-card{
   background-color: #F9FBFC
 }
@@ -207,11 +218,14 @@ textarea.tagger{
   width: 100vw;
   height: 100vh;
   position: fixed;
+  top: 0;
+  left: 0;
   z-index: 1000;
   overscroll-behavior: contain;
 }
-.bg-fotoviewer .hide {
-  display: none!important;
+
+.bg-enterpriseGradient{
+  background-color: #FAE529;
 }
 
 /*ediciones bootstrap*/

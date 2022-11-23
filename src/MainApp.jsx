@@ -20,14 +20,9 @@ export const MainApp = () => {
                     <Route path="/login" element={<Login/>} />
                     <Route path="/registrarse" element={<Register/>} />
                     <Route path="mapa">
-                        <Route path='' element={<Mapa/>}/>
                         <Route path=':filtro' element={<Mapa/>}/>
+                        <Route path='' element={<Mapa/>}/>                        
                     </Route>
-                    {/*<Route path="/perfil" element={
-                        <ProtectedRoute>
-                            <Perfil/>
-                        </ProtectedRoute>
-                    } />*/}
                     <Route path="/perfil">
                         <Route path=':userID' element={<ProtectedRoute><Perfil/></ProtectedRoute>}/>
                         <Route path='me' element={<ProtectedRoute><Perfil/></ProtectedRoute>}/>

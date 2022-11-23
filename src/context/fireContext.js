@@ -15,7 +15,7 @@ import {
     ref,
     uploadBytes,
     getDownloadURL,
-    listAll,
+    //listAll,
 } from 'firebase/storage';
 import {
     collection,
@@ -121,23 +121,6 @@ export const FireProvider = ({children}) =>{
         }        
     }
 
-    const getFotos = async() =>{
-        const archivosRef= ref(firestorage, user.uid+`/fotos`);
-        listAll(archivosRef)
-        .then((res) => {
-            console.log(res);
-            res.prefixes.forEach((folderRef) => {
-            // All the prefixes under listRef.
-            // You may call listAll() recursively on them.
-            });
-            res.items.forEach((itemRef) => {
-            // All the items under listRef.
-            });
-        }).catch((error) => {
-            // Uh-oh, an error occurred!
-        });
-    }
-
     /*db*/
     const userExist = async(userid) => {
         if(userid===null)return false;
@@ -220,7 +203,6 @@ export const FireProvider = ({children}) =>{
     }
 
     const addCalif = async(empresaid, calif, myuser) => {
-
         try {
             const antiguasCalif = await getCalif(empresaid)||{};
             const calificaciones = [...antiguasCalif, calif];
@@ -257,6 +239,59 @@ export const FireProvider = ({children}) =>{
             }
         }
         return comentario;
+    }
+
+    const empresaMarks = async() => {
+        const q = query(collection(firedb, "usuarios"), where("empresa", "==", true));
+
+        const querySnapshot = await getDocs(q);
+        let marcas =[]
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            
+            if(data.contacto.length>0){
+                const anchor = [doc.id, data.contacto[4].latitude, data.contacto[4].longitude]
+                marcas.push(anchor)
+            }
+        })
+        return marcas;
+    }
+
+    const setFotos = async(file,tit,des) =>{
+        //try {
+            const url = await subirFoto(file, file.name)
+            let lfotos = await getFotos(user.uid)||[];
+            const newfoto = {url: url,title: tit,desc: des}
+            const data = [...lfotos, newfoto];
+            await setDoc(doc(firedb, "fotos", user.uid), {fotos: data});
+           
+            
+        //} catch (error) { console.log('no se pudo subir la foto: '+error) }
+    }
+
+    const getFotos = async(uid) =>{
+        const docRef = doc(firedb, "fotos", uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            return docSnap.data().fotos
+        }
+        return [];
+
+        //trae las fotos directamente de la fire storage
+        /*const archivosRef= ref(firestorage, user.uid+`/fotos`);
+        listAll(archivosRef)
+        .then((res) => {
+            console.log(res);
+            res.prefixes.forEach((folderRef) => {
+            // All the prefixes under listRef.
+            // You may call listAll() recursively on them.
+            });
+            res.items.forEach((itemRef) => {
+            // All the items under listRef.
+            });
+        }).catch((error) => {
+            // Uh-oh, an error occurred!
+        });*/
     }
 
     //cambio estado del auth
@@ -316,8 +351,10 @@ export const FireProvider = ({children}) =>{
         updateUser,
         addProduct,
         getProd,
+        setFotos,
         addCalif,
         getCalif,
         isCalif,
+        empresaMarks,
     }}>{children}</fireContext.Provider>
 }

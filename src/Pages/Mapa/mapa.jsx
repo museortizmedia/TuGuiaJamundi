@@ -1,15 +1,30 @@
-import React from 'react';
-//import {useSearchParams} from "react-router-dom";
-import { useParams, /*useSearchParams*/ } from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import { useParams } from 'react-router-dom';
 import { FaSearch, FaCompass} from 'react-icons/fa';
 
-import 'bootstrap/dist/css/bootstrap.min.css'
+import { useContextFire } from '../../context/fireContext';
 
 import Menu from '../../Components/Shared/Menu'
 import Footer from '../../Components/Shared/Footer'
+import GMap from '../../Components/Mapa/unmapa';
+
 export const Mapa = () => {
+    const {empresaMarks} = useContextFire();
+
+    const [empresas, setEmpresa] = useState();
+
+
     const {filtro} = useParams()
-    //const [params] = useSearchParams()
+
+    useEffect(() => {
+        console.log(filtro)
+        const rellenarEmpresas = async()=>{ setEmpresa(await empresaMarks()) }
+        if(!empresas){
+            rellenarEmpresas();
+        }
+        
+    }, [])
+    
 
     const Buscar = () => {
         document.getElementById('search').placeholder="Buscar un sitio nuevo...";
@@ -19,10 +34,11 @@ export const Mapa = () => {
     return (
         <>
         <Menu currentPage='mapa'/>
-        <div className="container-fluid" style={{width: "95%"}}><div className='row'>
+        <div className="container-fluid" style={{width: "95%", height:"80vh"}}><div className='row'>
 
-            <div className="col-6 mt-4 text-center">
-                <div className="mapa shadow"/>
+            <div className="col-6 mt-4 round text-center">
+                {/*<div className="mapa shadow"/>*/}
+                <GMap marcas={empresas}/>
             </div>
 
             <div className="col-6 row mx-auto my-auto mt-4">

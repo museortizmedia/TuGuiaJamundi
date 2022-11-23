@@ -26,6 +26,7 @@ export const Perfil = () => {
 
     const {user, userExist, getUserInfo, getProd, addCalif, getCalif, isCalif, getFotos} = useContextFire();
 
+
     useEffect(()=>{
         const getInfo = async() => {
             const paramID = params.userID;
@@ -101,7 +102,7 @@ export const Perfil = () => {
         </div>
     <div className='w-100 row d-flex align-self-center text-center justify-content-center align-items-center noselect'>
         {localMenu===1&&<TabInfo profile={profile} editMode={editMode}/>}
-        {localMenu===2&&<TabOpinion profile={profile} editMode={editMode}/>}
+        {localMenu===2&&<TabOpinion profile={profile} editMode={editMode} getCalif={getCalif} getUserInfo={getUserInfo}/>}
         {localMenu===3&&<TabProd profile={profile} editMode={editMode} getProd={getProd}/>}
         {localMenu===4&&<TabFoto profile={profile} editMode={editMode} getFotos={getFotos}/>}
         {localMenu===5&&<TabMapa profile={profile} editMode={editMode}/>}
