@@ -1,18 +1,17 @@
 {
-  "files": {
-    "main.css": "/TuGuiaJamundi/static/css/main.6028e296.css",
-    "main.js": "/TuGuiaJamundi/static/js/main.da88d593.js",
-    "static/media/fondo.jpeg": "/TuGuiaJamundi/static/media/fondo.3cfeb65dbee59e0d1c88.jpeg",
-    "static/media/mapa.png": "/TuGuiaJamundi/static/media/mapa.09c5eba6cd11d779030e.png",
-    "static/media/Pick.png": "/TuGuiaJamundi/static/media/Pick.ccc7a7aedb4e2aa0deb1.png",
-    "static/media/logo1080.png": "/TuGuiaJamundi/static/media/logo1080.ab29128885bc60f2d0be.png",
-    "static/media/User.png": "/TuGuiaJamundi/static/media/User.50cfcfdbe913cf306c77.png",
-    "index.html": "/TuGuiaJamundi/index.html",
-    "main.6028e296.css.map": "/TuGuiaJamundi/static/css/main.6028e296.css.map",
-    "main.da88d593.js.map": "/TuGuiaJamundi/static/js/main.da88d593.js.map"
-  },
-  "entrypoints": [
-    "static/css/main.6028e296.css",
-    "static/js/main.da88d593.js"
-  ]
+  "main.css": "/TuGuiaJamundi/static/css/main.cdda6799.chunk.css",
+  "main.js": "/TuGuiaJamundi/static/js/main.20d9b1be.chunk.js",
+  "main.js.map": "/TuGuiaJamundi/static/js/main.20d9b1be.chunk.js.map",
+  "static/css/1.940d3fdd.chunk.css": "/TuGuiaJamundi/static/css/1.940d3fdd.chunk.css",
+  "static/js/1.dd147fa6.chunk.js": "/TuGuiaJamundi/static/js/1.dd147fa6.chunk.js",
+  "static/js/1.dd147fa6.chunk.js.map": "/TuGuiaJamundi/static/js/1.dd147fa6.chunk.js.map",
+  "runtime~main.js": "/TuGuiaJamundi/static/js/runtime~main.76f99c8c.js",
+  "runtime~main.js.map": "/TuGuiaJamundi/static/js/runtime~main.76f99c8c.js.map",
+  "static/media/Pick.png": "/TuGuiaJamundi/static/media/Pick.f06377b5.png",
+  "static/media/logo1080.png": "/TuGuiaJamundi/static/media/logo1080.21bb8499.png",
+  "static/css/main.cdda6799.chunk.css.map": "/TuGuiaJamundi/static/css/main.cdda6799.chunk.css.map",
+  "static/css/1.940d3fdd.chunk.css.map": "/TuGuiaJamundi/static/css/1.940d3fdd.chunk.css.map",
+  "index.html": "/TuGuiaJamundi/index.html",
+  "precache-manifest.ea892c6f41d12b46fa8fe9014b1e6a0a.js": "/TuGuiaJamundi/precache-manifest.ea892c6f41d12b46fa8fe9014b1e6a0a.js",
+  "service-worker.js": "/TuGuiaJamundi/service-worker.js"
 }
