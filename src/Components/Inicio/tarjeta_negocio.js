@@ -1,3 +1,4 @@
+import React from 'react';
 import {useNavigate} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -26,7 +27,7 @@ export const Tarjeta = ({alto,img,btn,tags,sitio,tagtitle}) => {
             <div className='blur_blue tarjeta_tag text-center text-white fw-bold text-uppercase pt-1 pb-1'>{tagTitle}</div>
 
             <div className='blur tarjeta_content pl-3 pr-3 pt-2 pb-2'>
-            <div className="text-muted ps-3 una_linea"># {tags.toString().replaceAll(","," ")}</div>
+            <div className="text-muted ps-3 una_linea">#{tags.toString().replaceAll(","," #")}</div>
             <div className="fw-bold ps-3 una_linea">{sitio}</div>
             </div>
             

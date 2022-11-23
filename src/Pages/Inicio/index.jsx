@@ -1,16 +1,31 @@
+import React, { useEffect } from 'react'
 import {Row, Col, Container} from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
+
+//import { useContextFire } from '../../context/fireContext'
 
 import Menu from '../../Components/Shared/Menu'
 import Footer from '../../Components/Shared/Footer'
 import Banner from '../../Components/Inicio/Banner'
 import Tarjeta from '../../Components/Inicio/tarjeta_negocio'
 import TarjetaTop from '../../Components/Inicio/tarjeta_top'
+import { Link } from 'react-router-dom'
+
+
 export const Index = () => {
+
+    //const {auth, user, getUserInfo} = useContextFire();
+
+    useEffect(()=>{
+        
+    },[])
+    
     return (
     <>
     {/* MENU: el menu contiene el logo con un enlace a la pagina de inicio, enlaces a exploración del mapa, configuracion de negocio y foto del perfil negocio o inciar sesión según el caso */}
-    <Menu/>
+    <Menu currentPage={'default'}/>
+    <Link to="/perfil/xobgyMkkgZe3g2NwR0pqbzqxocn2">asd</Link>
+    <Link to="/perfil/EQViylWbyrdptZG2F1d5NlLK2P02">asd</Link>
+    
     {/*BANNER: una imagen y un filtro de búsqueda de negocios que filtrará el componente SITIOSBUSQUEDA*/}
     <Banner/>
     {/* SITIOSBUSQUEDA: 3 cartas con los resultados mas cercanos a la búsqueda realizada, por defecto ejecuta una búsqueda aleatoria, tiene un boton ver mas que abrirá la exploración del mapa con la busqueda realizada para ver todo el contenido*/}
@@ -51,7 +66,7 @@ export const Index = () => {
             <div className='' style={{overflow: "auto",width: "100%", height: "40vh"}}>
                 <TarjetaTop img="https://mui.kitchen/__export/1601953024234/sites/muikitchen/img/2020/10/05/9_cholado_1.jpg_1339198041.jpg" sitio="El Parque del Cholado" desc="El único y original cholado de jamundí desde $12.000"/>
                 <TarjetaTop img="https://www.municipios.com.co/sitiosturisticos/20150222111434.jpg" sitio="Monumento a la vida" desc="Homenaje a las 11 personas asesinadas por el ejército, construida por Héctor Lombara"/>
-                <TarjetaTop img="https://lh3.ggpht.com/p/AF1QipNVRAmqAAuFbtqjWB6nkcPMmlN1J5Yd1fQNCmAc=s512" sitio="Hades Rugby" desc="Participa de los entrenos del único club de Rugby de Jamundí"/>
+                <TarjetaTop img="" sitio="Hades Rugby" desc="Participa de los entrenos del único club de Rugby de Jamundí"/>
             </div>
         </Col>
     </Row></Container>

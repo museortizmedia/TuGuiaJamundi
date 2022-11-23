@@ -1,6 +1,41 @@
 /*
 https://picsum.photos/2160/1080
 */
+/*scroll personalizado*/
+    /* Works on Firefox */
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: #d6d4c4 #FAE529;
+    }
+
+    /* Works on Chrome, Edge, and Safari */
+    *::-webkit-scrollbar {
+      width: 7px;
+    }
+
+    *::-webkit-scrollbar-track {
+      background: whitesmoke;
+    }
+
+    *::-webkit-scrollbar-thumb {
+      background-color: #d6d4c4; /*lightgrey;*/
+      border-radius: 20px;
+    }
+
+    *::-webkit-scrollbar-thumb:hover {
+      background-color: #FAE529;
+    }
+/*end scroll personalizado*/
+.hidescroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hidescroll {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+/*ocultar scroll*/
 .shadow-none {
   box-shadow: none!important;
 }
@@ -22,6 +57,44 @@ https://picsum.photos/2160/1080
               user-select: none; /* Non-prefixed version, currently
                                     supported by Chrome, Edge, Opera and Firefox */
   }
+  #loader-content {
+    position: fixed;
+    overflow-y: hidden;
+    inset: 0;
+    z-index: 1000;
+    left: 0;
+  	top: 0;
+    width: 100%;
+  	height: 100%;
+    background-color: rgba(255,255,255,1);
+    text-align: center;
+  }
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1010;
+  width: 120px;
+  height: 120px;
+  margin: -76px 0 0 -76px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #FAE529;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+  /*Menu clases*/
 .menu_item {
   font-weight: bold!important;
   color: #555!important;
@@ -31,11 +104,17 @@ https://picsum.photos/2160/1080
 }
 .menu_item_footer {
   color: rgb(128, 128, 128)!important;
+  font-size: .9em!important;
   text-decoration: none!important;
 }
 .menu_item_footer:hover {
   color: rgb(73, 73, 73)!important;
 }
+.title_footer{
+  font-size: 1.1em!important;
+  font-weight: bold;
+}
+/*Index*/
 .una_linea{
   white-space: nowrap;
   overflow: hidden;
@@ -74,22 +153,92 @@ https://picsum.photos/2160/1080
   height:72px;
   cursor: pointer;
 }
+/*Mapa*/
 .mapa{
   border-radius: 30px;
   height: 80vh;
   width: 40vw;
-  background-image: url('./Images/Mapa/mapa.png');
+  background-image: url('https://i.picsum.photos/id/851/2160/1080.jpg?hmac=y5R_Amsnxkjzhdb8kU9gAEM1zNiFQQHAHkY4-ajdbKw');
+  /*background-image: url('./Images/Mapa/mapa.png');*/
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #000;
 }
+.tag_filter{
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  background-color: #ddd;
+  border-radius: 35px;
+  text-align: center;
+}
+tag_filter::before:no(button){content: "#";}
 .bg_login_register{
-  background-image: url('./Images/Login/fondo.jpeg');
+  background-image: url('https://i.picsum.photos/id/851/2160/1080.jpg?hmac=y5R_Amsnxkjzhdb8kU9gAEM1zNiFQQHAHkY4-ajdbKw');
+  /*background-image: url('./Images/Login/fondo.jpeg');*/
   background-position: center center;
+}
+.marcadores svg g path{
+  fill: #FAE529;
+  stroke: #fff;
+}
+
+.marcadores svg g circle{
+  fill: #fff;
+}
+
+
+
+.bg-card{
+  background-color: #F9FBFC
+}
+textarea.tagger{
+  border-radius: 35px;
+  padding: 1em;
+  overflow: hidden;
+  height: 55px;
+  border: 0px;
+  background-color: #D9D9D9;
+}
+
+.starselect{color: #FFD541;}
+.star:hover{
+  color: #FFD541;
+}
+
+.plus-añadir{
+  color: #DAD8D1;
+  font-size: 5em;
+  cursor: pointer;
+}
+.plus-añadir:hover{ color: #f3f2ed; font-size: 6em;}
+
+.bg-fotoviewer{
+  background-color: rgba(0,0,0,.9);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  overscroll-behavior: contain;
+}
+
+.bg-enterpriseGradient{
+  background-color: #FAE529;
 }
 
 /*ediciones bootstrap*/
+.btn-warning{
+  color: white!important;
+}
 .btn-outline-warning:hover{
-  color: white!important;}
+  color: white!important;
+}
+.btn-warning:hover{
+  color: white!important;
+}
+.disabled{
+  color: #000!important;
+}
   /*editar important el color final del warning*/

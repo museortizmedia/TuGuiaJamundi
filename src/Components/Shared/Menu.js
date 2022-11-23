@@ -1,71 +1,131 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-import {Row, Col, Container} from 'react-bootstrap'
+import { useContextFire } from '../../context/fireContext'
+import { FaSignOutAlt, FaUserCircle} from 'react-icons/fa';
+import LoadingComponent from './Loading';
+
 import 'bootstrap/dist/css/bootstrap.min.css'
+import Tooltip from 'react-bootstrap/Tooltip';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 
-export const Menu = ({selected}) => {
+export const Menu = ({currentPage=null}) => {
+    const {auth, user, loading, logout} = useContextFire(); 
 
-    const Activar_IniciarSesion = () => {
-        document.getElementById('sesion_active').classList.remove('d-none');
-        document.getElementById('sesion_noactive').classList.add('d-none');
-    }
-    const Cerrar_IniciarSesion = () => {
-        document.getElementById('sesion_active').classList.add('d-none');
-        document.getElementById('sesion_noactive').classList.remove('d-none');
-    }
-    const Ocultar_IniciarSesion = () => {
-        document.getElementById('btn_login').classList.add('d-none');
-    }
-    const Ocultar_Registros = () => {
-        document.getElementById('btn_register_sa').classList.add('d-none');
-        document.getElementById('btn_register').classList.add('d-none');
-    }
+    useEffect(()=>{
+        window.scrollTo(0, 0);
+    },[loading])
 
-    useEffect(() => {
-        switch(selected){
-            default:
-                break;
-            case "login":
-                Ocultar_IniciarSesion();
-                break;
-            case "register":
-                Cerrar_IniciarSesion()
-                Ocultar_Registros()
-                break;
-            case "user":
-                Activar_IniciarSesion();
-                break;
-        }
-    });
-
+    const handlelogout = async() => {
+        await logout()
+    }
     
-
+    //menu cargando
+    if(loading) return (
+    <div className="container-fluid text-center" style={{width: "100%", height:"10%"}}>
+        <LoadingComponent/> 
+    </div>
+    )
+    //menu mensaje error en configuración
+    if(currentPage===null) return (
+        <div className="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">
+        <div>
+            menu error: seleccione la currentPage
+        </div>
+        </div>
+    )
+    //menu retorno defecto
     return (
-        <>
-        <Container fluid className="bg-trasparent p-2 navbar-expand-sm" style={{width: "95%"}}>
-        <Row className="mx-auto">
-            <Col xs={2} className="my-auto noselect">
+        <div className="container-fluid bg-trasparent pt-3 pb-3 p-2 navbar-expand-sm" style={{width: "100%"}}>
+        <div className="row mx-auto noselect" style={{width: "95%"}}>
+
+            <div className="col-2 my-auto">
                 <a href='/TuGuiaJamundi/'>
                     <img src={require('../../Images/Brand/logo1080.png')} alt={"Logo"} style={{width: "120px"}}/>
                 </a>
-            </Col>
-            <Col xs={10} className="text-end my-auto d-none d-sm-block noselect">
-            <a id="btn_mapa" className="p-2 nav-item nav-link menu_item d-inline " href='/TuGuiaJamundi/#/mapa'>El Mapa</a>
-                <span id='sesion_noactive'>
-                    <a id="btn_register" className="p-2 nav-item nav-link menu_item d-inline" href='/TuGuiaJamundi/#/registrarse'>Registrarse</a>
-                    <a id="btn_login" className="p-2 nav-item nav-link menu_item d-inline" href='/TuGuiaJamundi/#/login'>Iniciar Sesión</a>
-                </span>
-                <span id='sesion_active' className='d-none'>
-                <a id="btn_register_sa" className="p-2 nav-item nav-link menu_item d-inline" href='/TuGuiaJamundi/#/registrarse'>Registrarse</a>
-                <a href='/'>
-                    <img className="p-2 nav-item nav-link menu_item d-inline" src={require('../../Images/Brand/User.png')} alt={"User"} title="cerrar sesión" style={{width: "60px"}} onClick={Cerrar_IniciarSesion}/>
-                </a>
-                </span>
+            </div>
+
+            <div className="col-10 text-end my-auto noselect">
+            <Link className={`p-2 nav-item nav-link menu_item d-inline
+            ${currentPage==='default' && 'disabled'}`}
+             to="/">
+                Inicio
+            </Link>
+            <Link className={`p-2 nav-item nav-link menu_item d-inline
+            ${currentPage==='mapa' && 'disabled'}`}
+             to="/mapa">
+                El Mapa
+            </Link>
+            {!auth&&<>
+            <Link className={`p-2 nav-item nav-link menu_item d-inline
+            ${currentPage==='registrarse' && 'disabled'}`}
+             to="/registrarse">
+                Registrarse
+            </Link>
+            <Link className={`p-2 nav-item nav-link menu_item d-inline
+            ${currentPage==='login' && 'disabled'}`}
+             to="/login">
+                Iniciar Sesión
+            </Link>
+            </>}
+
+            {auth&&<>
+                <OverlayTrigger
+                delay={{ hide: 450, show: 300 }}
+                overlay={(props) => (
+                <Tooltip {...props}>
+                    {"Ver perfil"}
+                </Tooltip>
+                )}
+                placement="bottom"
+                >
+                    <Link className={`p-2 nav-item nav-link menu_item d-inline
+                    ${currentPage==='perfil' && 'disabled'}`}
+                    to="/perfil/me">
+                        {!user.photoURL && !auth.photoURL?
+                        <FaUserCircle className="m-2 pr-2" size={44}/>
+                        : 
+                        <img
+                        referrerPolicy='no-referrer'
+                        src={user.photoURL?user.photoURL||'':auth.photoURL||'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'}
+                        alt=""
+                        style={{width: "40px", height:"40px", borderRadius:"10px", objectFit:"cover"}}
+                        className="m-2 pr-2 shadow-sm"
+                        />}
+
+                        {
+                        !user.displayName && !auth.displayName?
+                        auth.email.split("@")[0]
+                        :
+                        user.displayName? user.displayName:auth.displayName}
+                    </Link>
+                    
+
+                </OverlayTrigger>
+            
+                <OverlayTrigger
+                delay={{ hide: 450, show: 300 }}
+                overlay={(props) => (
+                <Tooltip {...props}>
+                    {"Salir"}
+                </Tooltip>
+                )}
+                placement="bottom"
+                >
+                <button className={`p-2 btn btn-link nav-item nav-link menu_item d-inline
+            ${currentPage==='' && 'disabled'}`}
+                onClick={handlelogout}>
+                    <FaSignOutAlt style={{fontSize:"25px"}}/>
+                </button>
+                </OverlayTrigger>
+            </>}
+            
+            </div>
                 
-            </Col>
-        </Row>
-        </Container>
-        </>
+                
+                
+            </div>
+        </div>
     )
 }
 export default Menu;
