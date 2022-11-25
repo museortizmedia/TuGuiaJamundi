@@ -141,3 +141,12 @@ En la lógica se determinaron las siguientes exportaciones:
         isCalif: Devuelve el id dele autor de una calificacion
         empresaMarks: Devuelve un objeto con la latitud y longitud de todas las empresas registradas
 ```
+## Diseño de BD
+### FireStore Dababase
+`calificaciones`:ID: opiniones[ {autor:String(ID), estrellas:Int(1-5), texto: String(500)} ]  
+`fotos`:ID: fotos[ {title:String, desc:String, url:String}]  
+`productos`:ID: productos[ {name:String, desc:String, pic:String, price:Int}]  
+`usuarios`:ID:{uid:String, displayName:String, bio:String, email:String, photoURL:String, portada:String, nicel:Int, empresa:bool, contacto:[5],map:GEOPOINT,stars:[5],tags:[] }
+
+### Storage  
+`ID`:photoURL,portada,`fotos`,`productos`
