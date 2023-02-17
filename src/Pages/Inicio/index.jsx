@@ -23,8 +23,8 @@ export const Index = () => {
     <>
     {/* MENU: el menu contiene el logo con un enlace a la pagina de inicio, enlaces a exploración del mapa, configuracion de negocio y foto del perfil negocio o inciar sesión según el caso */}
     <Menu currentPage={'default'}/>
-    <Link to="/perfil/xobgyMkkgZe3g2NwR0pqbzqxocn2">asd</Link>
-    <Link to="/perfil/EQViylWbyrdptZG2F1d5NlLK2P02">asd</Link>
+    {/*<Link to="/perfil/xobgyMkkgZe3g2NwR0pqbzqxocn2">asd</Link>
+    <Link to="/perfil/EQViylWbyrdptZG2F1d5NlLK2P02">asd</Link>*/}
     
     {/*BANNER: una imagen y un filtro de búsqueda de negocios que filtrará el componente SITIOSBUSQUEDA*/}
     <Banner/>
