@@ -1,7 +1,7 @@
 {
   "main.css": "/TuGuiaJamundi/static/css/main.cdda6799.chunk.css",
-  "main.js": "/TuGuiaJamundi/static/js/main.1a294570.chunk.js",
-  "main.js.map": "/TuGuiaJamundi/static/js/main.1a294570.chunk.js.map",
+  "main.js": "/TuGuiaJamundi/static/js/main.d9794221.chunk.js",
+  "main.js.map": "/TuGuiaJamundi/static/js/main.d9794221.chunk.js.map",
   "static/css/1.940d3fdd.chunk.css": "/TuGuiaJamundi/static/css/1.940d3fdd.chunk.css",
   "static/js/1.dd147fa6.chunk.js": "/TuGuiaJamundi/static/js/1.dd147fa6.chunk.js",
   "static/js/1.dd147fa6.chunk.js.map": "/TuGuiaJamundi/static/js/1.dd147fa6.chunk.js.map",
@@ -12,6 +12,6 @@
   "static/css/main.cdda6799.chunk.css.map": "/TuGuiaJamundi/static/css/main.cdda6799.chunk.css.map",
   "static/css/1.940d3fdd.chunk.css.map": "/TuGuiaJamundi/static/css/1.940d3fdd.chunk.css.map",
   "index.html": "/TuGuiaJamundi/index.html",
-  "precache-manifest.34b9da737f3fb178169fccbdb9595af2.js": "/TuGuiaJamundi/precache-manifest.34b9da737f3fb178169fccbdb9595af2.js",
+  "precache-manifest.293aa6cc01eb54398e85c641ea5e8edb.js": "/TuGuiaJamundi/precache-manifest.293aa6cc01eb54398e85c641ea5e8edb.js",
   "service-worker.js": "/TuGuiaJamundi/service-worker.js"
 }

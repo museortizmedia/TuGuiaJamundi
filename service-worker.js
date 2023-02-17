@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/TuGuiaJamundi/precache-manifest.34b9da737f3fb178169fccbdb9595af2.js"
+  "/TuGuiaJamundi/precache-manifest.293aa6cc01eb54398e85c641ea5e8edb.js"
 );
 
 workbox.clientsClaim();
