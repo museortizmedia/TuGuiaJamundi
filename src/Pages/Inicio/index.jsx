@@ -23,8 +23,8 @@ export const Index = () => {
     <>
     {/* MENU: el menu contiene el logo con un enlace a la pagina de inicio, enlaces a exploración del mapa, configuracion de negocio y foto del perfil negocio o inciar sesión según el caso */}
     <Menu currentPage={'default'}/>
-    <Link to="/perfil/xobgyMkkgZe3g2NwR0pqbzqxocn2">asd</Link>
-    <Link to="/perfil/EQViylWbyrdptZG2F1d5NlLK2P02">asd</Link>
+    {/*<Link to="/perfil/xobgyMkkgZe3g2NwR0pqbzqxocn2">asd</Link>
+    <Link to="/perfil/EQViylWbyrdptZG2F1d5NlLK2P02">asd</Link>*/}
     
     {/*BANNER: una imagen y un filtro de búsqueda de negocios que filtrará el componente SITIOSBUSQUEDA*/}
     <Banner/>
@@ -42,19 +42,19 @@ export const Index = () => {
     </Row>
     <Row>
         <Col style={{height: "30vh"}} className="d-none d-lg-flex justify-content-around col-12 col-md-7">
-            <Tarjeta alto="100%" sitio="Café El Paraíso" tags={["café","magia"]} tagtitle="Nuevo" img="https://i.picsum.photos/id/1060/1080/1080.jpg?hmac=B1UD-SMXcJtl9ZOf1KJxJCVFjVmSTkoN-yrznJp9Mz4"/>
-            <Tarjeta alto="100%" sitio="Chorrera del Mono" tags={["agua","montaña","aventura"]} img="https://i.picsum.photos/id/806/1080/1080.jpg?hmac=rJHFPtp7FUjB7B41ZO5cmd-57MNg7L4IEZUAzTRKsbI"/>
-            <Tarjeta alto="60%" sitio="Valle Blanco" tags={["caminata","extremo"]} btn="active" img="https://i.picsum.photos/id/277/1080/1080.jpg?hmac=Uib8zB7zD5qk_Nrx5BqIBRbRRRvO-de70aTcye0X2k0"/>
+            <Tarjeta alto="100%" sitio="Café El Paraíso" tags={["café","magia"]} tagtitle="Nuevo" img="https://picsum.photos/id/1060/1080/1080.jpg?hmac=B1UD-SMXcJtl9ZOf1KJxJCVFjVmSTkoN-yrznJp9Mz4"/>
+            <Tarjeta alto="100%" sitio="Chorrera del Mono" tags={["agua","montaña","aventura"]} img="https://picsum.photos/id/806/1080/1080.jpg?hmac=rJHFPtp7FUjB7B41ZO5cmd-57MNg7L4IEZUAzTRKsbI"/>
+            <Tarjeta alto="60%" sitio="Valle Blanco" tags={["caminata","extremo"]} btn="active" img="https://picsum.photos/id/277/1080/1080.jpg?hmac=Uib8zB7zD5qk_Nrx5BqIBRbRRRvO-de70aTcye0X2k0"/>
         </Col>
         <Row className="d-flex d-lg-none justify-content-center col-12">
             <Col style={{height: "30vh", margin: "10px"}} className="col-12">
-            <Tarjeta alto="100%" sitio="Café El Paraíso" tags={["café","magia"]} tagtitle="Nuevo" img="https://i.picsum.photos/id/1060/1080/1080.jpg?hmac=B1UD-SMXcJtl9ZOf1KJxJCVFjVmSTkoN-yrznJp9Mz4"/>
+            <Tarjeta alto="100%" sitio="Café El Paraíso" tags={["café","magia"]} tagtitle="Nuevo" img="https://picsum.photos/id/1060/1080/1080.jpg?hmac=B1UD-SMXcJtl9ZOf1KJxJCVFjVmSTkoN-yrznJp9Mz4"/>
             </Col>
             <Col style={{height: "30vh", margin: "10px"}} className="col-12">
-            <Tarjeta alto="100%" sitio="Chorrera del Mono" tags={["agua","montaña","aventura"]} img="https://i.picsum.photos/id/806/1080/1080.jpg?hmac=rJHFPtp7FUjB7B41ZO5cmd-57MNg7L4IEZUAzTRKsbI"/>
+            <Tarjeta alto="100%" sitio="Chorrera del Mono" tags={["agua","montaña","aventura"]} img="https://picsum.photos/id/806/1080/1080.jpg?hmac=rJHFPtp7FUjB7B41ZO5cmd-57MNg7L4IEZUAzTRKsbI"/>
             </Col>
             <Col style={{height: "30vh", margin: "10px"}} className="col-12 mb-5 pb-5">
-            <Tarjeta alto="100%" sitio="Valle Blanco" tags={["caminata","extremo"]} btn="active" img="https://i.picsum.photos/id/277/1080/1080.jpg?hmac=Uib8zB7zD5qk_Nrx5BqIBRbRRRvO-de70aTcye0X2k0"/>
+            <Tarjeta alto="100%" sitio="Valle Blanco" tags={["caminata","extremo"]} btn="active" img="https://picsum.photos/id/277/1080/1080.jpg?hmac=Uib8zB7zD5qk_Nrx5BqIBRbRRRvO-de70aTcye0X2k0"/>
             </Col>
         </Row>
     {/* SITIOSSUGERIDOS: Side con negocios que pagan plan premium */}
